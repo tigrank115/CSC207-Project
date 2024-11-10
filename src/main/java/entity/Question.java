@@ -5,6 +5,8 @@ public abstract class Question {
     private final boolean required;
     private String prompt;
 
+    protected AnswerType answerType;
+
     public Question(String prompt, boolean required) {
         this.required = required;
         this.prompt = prompt;
@@ -18,7 +20,8 @@ public abstract class Question {
         return prompt;
     }
 
-    // This will be used to populate a Response through the interface.
-    public abstract Answer<?> generateAnswer();
+    public AnswerType getAnswerType() {
+        return answerType;
+    }
 
 }
