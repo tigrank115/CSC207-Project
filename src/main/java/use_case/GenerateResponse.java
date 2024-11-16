@@ -10,7 +10,7 @@ public class GenerateResponse {
 
     // private List<Question> questionList;
     private LinkedList<Question> questionList;
-    private List<Answer<?>> answerList;
+    private List<Answer> answerList;
 
     public GenerateResponse(Survey survey) {
         // New copy of the Survey's questions
@@ -18,9 +18,9 @@ public class GenerateResponse {
         this.answerList = new ArrayList<>();
     }
 
-    private void generateNextAnswer(Object input) {
+    private void generateNextAnswer(String[] input) {
         Question nextQuestion = questionList.removeFirst();
-        Answer<?> answer = nextQuestion.getAnswer(input);
+        Answer answer = nextQuestion.getAnswer(input);
 
         // Case `input`'s type is unrecognized
         if (answer == null) {

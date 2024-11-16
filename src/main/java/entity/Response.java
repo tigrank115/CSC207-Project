@@ -7,17 +7,17 @@ import java.util.List;
 public class Response {
 
     // These asnwers will reflect Survey Questions, guaranteed by the use cases.
-    private List<Answer<?>> answers;
+    private List<Answer> answers;
 
     public Response() {
-        this.answers = new ArrayList<Answer<?>>();
+        this.answers = new ArrayList<Answer>();
     }
 
-    public Response(List<Answer<?>> answers) {
+    public Response(List<Answer> answers) {
         this.answers = answers;
     }
 
-    public Response addAnswers(List<Answer<?>> answers) {
+    public Response addAnswers(List<Answer> answers) {
         this.answers = answers;
         return this;
     }

@@ -24,8 +24,8 @@ public abstract class Question {
         return answerType;
     }
 
-    public Answer<?> getAnswer(Object input) {
-        return AnswerFactory.createAnswer(getAnswerType(), input);
+    public Answer getAnswer(String[] userInput) {
+        return new Answer(getAnswerType(), userInput);
     }
 
 }
