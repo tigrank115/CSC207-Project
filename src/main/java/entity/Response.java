@@ -13,4 +13,12 @@ public class Response {
         this.answers = new ArrayList<Answer<?>>();
     }
 
+    public Response(List<Answer<?>> answers) {
+        this.answers = answers;
+    }
+
+    public Response addAnswers(List<Answer<?>> answers) {
+        this.answers = answers;
+        return this;
+    }
 }

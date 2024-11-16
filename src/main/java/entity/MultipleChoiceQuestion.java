@@ -10,8 +10,6 @@ public class MultipleChoiceQuestion extends Question {
     // TODO: Should probably refactor into a different pattern.
     private final List<String> options;
 
-    // Determines whether only one answer can be selected.
-    boolean singleAnswer;
 
     public MultipleChoiceQuestion(String prompt,
                                   List<String> options,
@@ -19,8 +17,12 @@ public class MultipleChoiceQuestion extends Question {
                                   boolean required) {
         super(prompt, required);
         this.options = options;
-        this.singleAnswer = singleAnswer;
-        this.answerType = AnswerType.MULTIPLE_CHOICE;
+
+        if (singleAnswer) {
+            this.answerType = AnswerType.SINGLE_CHOICE;
+        } else {
+            this.answerType = AnswerType.MULTIPLE_CHOICE;
+        }
     }
 
     public List<String> getOptions() {

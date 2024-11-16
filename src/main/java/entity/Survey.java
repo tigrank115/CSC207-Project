@@ -21,6 +21,10 @@ public class Survey {
         questions.add(question);
     }
 
+    public List<Question> getQuestions() {
+        return new ArrayList<>(questions);
+    }
+
     public Date getCloseDate() {
         return closeDate;
     }

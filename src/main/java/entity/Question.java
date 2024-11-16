@@ -3,7 +3,7 @@ package entity;
 public abstract class Question {
 
     private final boolean required;
-    private String prompt;
+    private final String prompt;
 
     protected AnswerType answerType;
 
@@ -22,6 +22,10 @@ public abstract class Question {
 
     public AnswerType getAnswerType() {
         return answerType;
+    }
+
+    public Answer<?> getAnswer(Object input) {
+        return AnswerFactory.createAnswer(getAnswerType(), input);
     }
 
 }
