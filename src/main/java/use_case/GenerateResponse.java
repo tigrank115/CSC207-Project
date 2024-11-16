@@ -20,12 +20,12 @@ public class GenerateResponse {
 
     private void generateNextAnswer(String[] input) {
         Question nextQuestion = questionList.removeFirst();
-        Answer answer = nextQuestion.getAnswer(input);
+        Answer answer = new Answer(nextQuestion.getAnswerType(), input);
 
-        // Case `input`'s type is unrecognized
-        if (answer == null) {
-            throw new RuntimeException("Tried to generate Answer from unrecognized type");
+        if (!nextQuestion.validateAnswer(answer)) {
+            throw new RuntimeException("An Answer is invalid.");
         }
+
         answerList.add(answer);
     }
 

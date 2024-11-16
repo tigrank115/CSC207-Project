@@ -9,4 +9,8 @@ public class Answer {
         this.answerType = answerType;
         this.userInput = userInput;
     }
+
+    public String[] getUserInput() {
+        return userInput;
+    }
 }

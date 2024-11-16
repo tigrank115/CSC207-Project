@@ -7,7 +7,6 @@ import java.util.List;
  */
 public class MultipleChoiceQuestion extends Question {
 
-    // TODO: Should probably refactor into a different pattern.
     private final List<String> options;
 
 
@@ -35,5 +34,13 @@ public class MultipleChoiceQuestion extends Question {
         } catch (IndexOutOfBoundsException _) {
             return null;
         }
+    }
+
+    @Override
+    public boolean validateAnswer(Answer answer) {
+        if (getAnswerType() == AnswerType.SINGLE_CHOICE) {
+            return answer.getUserInput().length <= 1;
+        }
+        return answer.getUserInput().length <= options.size();
     }
 }

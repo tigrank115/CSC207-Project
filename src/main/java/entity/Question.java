@@ -24,8 +24,7 @@ public abstract class Question {
         return answerType;
     }
 
-    public Answer getAnswer(String[] userInput) {
-        return new Answer(getAnswerType(), userInput);
-    }
+    // We assume the Answer's AnswerType matches that of the question.
+    public abstract boolean validateAnswer(Answer answer);
 
 }
