@@ -22,6 +22,9 @@ public class GenerateResponse {
         Question nextQuestion = questionList.removeFirst();
         Answer answer = new Answer(nextQuestion.getAnswerType(), input);
 
+        /* TODO: Panic if required question is "unanswered" -- in that case,
+        *   probably best to handle input through some concrete pipeline. */
+
         if (!nextQuestion.validateAnswer(answer)) {
             throw new RuntimeException("An Answer is invalid.");
         }

@@ -17,8 +17,12 @@ public class Response {
         this.answers = answers;
     }
 
-    public Response addAnswers(List<Answer> answers) {
-        this.answers = answers;
+    public Response addAnswer(Answer answer) {
+        this.answers.add(answer);
         return this;
+    }
+
+    public List<Answer> getAnswers() {
+        return new ArrayList<>(answers);
     }
 }

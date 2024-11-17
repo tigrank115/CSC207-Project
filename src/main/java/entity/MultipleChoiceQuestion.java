@@ -31,7 +31,7 @@ public class MultipleChoiceQuestion extends Question {
     public String getOption(int idx) {
         try {
             return options.get(idx);
-        } catch (IndexOutOfBoundsException _) {
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

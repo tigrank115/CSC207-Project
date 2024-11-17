@@ -13,4 +13,8 @@ public class Answer {
     public String[] getUserInput() {
         return userInput;
     }
+
+    public AnswerType getAnswerType() {
+        return answerType;
+    }
 }
