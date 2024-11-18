@@ -3,7 +3,6 @@ package data_access;
 import entity.Answer;
 import entity.AnswerType;
 import entity.Response;
-import data_access.Serializer;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 
-public class SerializerUnitTest {
+public class ResponseSerializerUnitTest {
 
     @Test
     public void responseToJsonTest() {
@@ -23,7 +22,7 @@ public class SerializerUnitTest {
 
         Response response = new Response(input);
 
-        JSONObject actual = Serializer.responseToJson(response);
+        JSONObject actual = ResponseSerializer.responseToJson(response);
 
         assertEquals("{\"answers\":[{\"answerType\":\"TEXT\",\"userInput\":[\"Hello, World\"]},{\"answerType\":\"TEXT\",\"userInput\":[\"Hello, There\",\"Foo Bar Baz\"]}]}", actual.toString());
     }
@@ -31,7 +30,7 @@ public class SerializerUnitTest {
     @Test
     public void jsonToAnswerTest() {
         JSONObject input = new JSONObject("{\"answerType\":\"SINGLE_CHOICE\",\"userInput\":[\"21\"]}\"}");
-        Answer actual = Serializer.jsonToAnswer(input);
+        Answer actual = ResponseSerializer.jsonToAnswer(input);
 
         assertArrayEquals(new String[]{"21"}, actual.getUserInput());
         assertEquals(AnswerType.SINGLE_CHOICE, actual.getAnswerType());
@@ -40,7 +39,7 @@ public class SerializerUnitTest {
     @Test
     public void jsonToResponseTest() {
         JSONObject json = new JSONObject("{\"answers\":[{\"answerType\":\"MULTIPLE_CHOICE\",\"userInput\":[\"multiple choice here...\"]},{\"answerType\":\"TEXT\",\"userInput\":[\"Hello, There\",\"Foo Bar Baz\"]}]}");
-        Response actual = Serializer.jsonToResponse(json);
+        Response actual = ResponseSerializer.jsonToResponse(json);
 
         Answer[] expected = new Answer[]{
             new Answer(AnswerType.MULTIPLE_CHOICE, new String[]{"multiple choice here..."}),

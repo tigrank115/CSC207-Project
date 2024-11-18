@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Temporary class holding the foundational entity JSON conversion.
  */
-public class Serializer {
+public class ResponseSerializer {
 
     public static JSONObject responseToJson(Response response) {
 
