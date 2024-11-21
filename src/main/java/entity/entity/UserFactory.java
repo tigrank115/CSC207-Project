@@ -1,4 +1,4 @@
-package entity;
+package entity.entity;
 
 /**
  * Factory for creating users.
