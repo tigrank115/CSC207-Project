@@ -1,4 +1,4 @@
-package entity.entity;
+package entity;
 
 /**
  * A simple implementation of the User interface.
