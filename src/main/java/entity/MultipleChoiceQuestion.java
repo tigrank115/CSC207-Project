@@ -7,11 +7,8 @@ import java.util.List;
  */
 public class MultipleChoiceQuestion extends Question {
 
-    // TODO: Should probably refactor into a different pattern.
     private final List<String> options;
 
-    // Determines whether only one answer can be selected.
-    boolean singleAnswer;
 
     public MultipleChoiceQuestion(String prompt,
                                   List<String> options,
@@ -19,8 +16,12 @@ public class MultipleChoiceQuestion extends Question {
                                   boolean required) {
         super(prompt, required);
         this.options = options;
-        this.singleAnswer = singleAnswer;
-        this.answerType = AnswerType.MULTIPLE_CHOICE;
+
+        if (singleAnswer) {
+            this.answerType = AnswerType.SINGLE_CHOICE;
+        } else {
+            this.answerType = AnswerType.MULTIPLE_CHOICE;
+        }
     }
 
     public List<String> getOptions() {
@@ -30,8 +31,16 @@ public class MultipleChoiceQuestion extends Question {
     public String getOption(int idx) {
         try {
             return options.get(idx);
-        } catch (IndexOutOfBoundsException _) {
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
+    }
+
+    @Override
+    public boolean validateAnswer(Answer answer) {
+        if (getAnswerType() == AnswerType.SINGLE_CHOICE) {
+            return answer.getUserInput().length <= 1;
+        }
+        return answer.getUserInput().length <= options.size();
     }
 }

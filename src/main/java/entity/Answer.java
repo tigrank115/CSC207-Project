@@ -1,14 +1,20 @@
 package entity;
 
-public class Answer<T> {
+public class Answer {
 
-    private T userInput;
+    private AnswerType answerType;
+    private String[] userInput;
 
-    public Answer(T userInput) {
+    public Answer(AnswerType answerType, String[] userInput) {
+        this.answerType = answerType;
         this.userInput = userInput;
     }
 
-    public T getUserInput() {
+    public String[] getUserInput() {
         return userInput;
+    }
+
+    public AnswerType getAnswerType() {
+        return answerType;
     }
 }

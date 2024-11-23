@@ -3,7 +3,7 @@ package entity;
 public abstract class Question {
 
     private final boolean required;
-    private String prompt;
+    private final String prompt;
 
     protected AnswerType answerType;
 
@@ -23,5 +23,8 @@ public abstract class Question {
     public AnswerType getAnswerType() {
         return answerType;
     }
+
+    // We assume the Answer's AnswerType matches that of the question.
+    public abstract boolean validateAnswer(Answer answer);
 
 }

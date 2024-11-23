@@ -9,4 +9,9 @@ public class TextQuestion extends Question {
         super(prompt, required);
         this.answerType = AnswerType.TEXT;
     }
+
+    @Override
+    public boolean validateAnswer(Answer answer) {
+        return answer.getUserInput().length == 1;
+    }
 }

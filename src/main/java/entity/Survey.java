@@ -12,13 +12,22 @@ public class Survey {
     private Date closeDate;
     private boolean active;
 
-    public Survey() {
+    public Survey(String name) {
+        this.name = name;
         this.active = true;
         this.questions = new ArrayList<Question>();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addQuestion(Question question) {
         questions.add(question);
+    }
+
+    public List<Question> getQuestions() {
+        return new ArrayList<>(questions);
     }
 
     public Date getCloseDate() {
@@ -31,6 +40,11 @@ public class Survey {
 
     public boolean isActive() {
         return active;
+    }
+
+    // Temporary set method, need to automate on initialization using closeDate!
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }
