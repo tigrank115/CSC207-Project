@@ -1,4 +1,4 @@
-package entity.entity;
+package entity;
 
 /**
  * The representation of a user in our program.
