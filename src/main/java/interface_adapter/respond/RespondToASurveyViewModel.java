@@ -13,7 +13,7 @@ import interface_adapter.ViewModel;
         public static final String OK_BUTTON_LABEL = "OK";
 
         public RespondToASurveyViewModel() {
-            super("sign up");
+            super("respond to a survey");
             setState(new RespondToASurveyState());
         }
 

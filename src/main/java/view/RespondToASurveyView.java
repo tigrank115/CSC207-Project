@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.respond.RespondToASurveyController;
+import interface_adapter.respond.RespondToASurveyState;
 import interface_adapter.respond.RespondToASurveyViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
@@ -57,12 +58,10 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
                         new ActionListener() {
                                 public void actionPerformed(ActionEvent evt) {
                                         if (evt.getSource().equals(ok)) {
-                                                final SignupState currentState = signupViewModel.getState();
+                                                final RespondToASurveyState currentState = respondtoasurveyViewModel.getState();
 
-                                                signupController.execute(
-                                                        currentState.getUsername(),
-                                                        currentState.getPassword(),
-                                                        currentState.getRepeatPassword()
+                                                respondtoasurveyController.execute(
+                                                        currentState.getSurvey()
                                                 );
                                         }
                                 }
@@ -70,26 +69,21 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
                 );
 
                 cancel.addActionListener(this);
+                addIDListener();
 
-                addUsernameListener();
-                addPasswordListener();
-                addRepeatPasswordListener();
 
                 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
                 this.add(title);
                 this.add(idInfo);
                 this.add(buttons);
-
 
         }
         private void addIDListener() {
                 idInputField.getDocument().addDocumentListener(new DocumentListener() {
 
                         private void documentListenerHelper() {
-                                final SignupState currentState = signupViewModel.getState();
-                                currentState.setUsername(usernameInputField.getText());
-                                signupViewModel.setState(currentState);
+                                final RespondToASurveyState currentState = respondtoasurveyViewModel.getState();
+                                respondtoasurveyViewModel.setState(currentState);
                         }
 
                         @Override
