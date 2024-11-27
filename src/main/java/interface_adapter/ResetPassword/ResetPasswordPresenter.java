@@ -41,5 +41,11 @@ public class ResetPasswordPresenter implements LoginOutputBoundary {
     @Override
     public void prepareFailView(String error) {
     }
+
+    @Override
+    public void switchToSignupView() {
+
+    }
+
 }
 
