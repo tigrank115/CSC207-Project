@@ -1,10 +1,8 @@
 package use_case.upload_survey;
 
 import data_access.InMemorySurveyDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
 import entity.*;
 import org.junit.Test;
-import use_case.login.*;
 
 import java.util.Arrays;
 import java.util.Calendar;
