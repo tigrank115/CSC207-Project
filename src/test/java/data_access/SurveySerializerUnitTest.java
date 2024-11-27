@@ -1,12 +1,12 @@
 package data_access;
 
+import data_access.serialization.SurveySerializer;
 import entity.MultipleChoiceQuestion;
 import entity.Question;
 import entity.Survey;
 import entity.TextQuestion;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

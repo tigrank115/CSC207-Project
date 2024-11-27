@@ -1,4 +1,4 @@
-package data_access;
+package data_access.serialization;
 
 import entity.Question;
 import entity.Survey;
@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class SurveySerializer {

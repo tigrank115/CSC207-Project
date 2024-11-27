@@ -1,4 +1,4 @@
-package data_access;
+package data_access.serialization;
 
 import entity.MultipleChoiceQuestion;
 import entity.Question;
