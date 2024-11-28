@@ -29,4 +29,9 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
     public void prepareFailView(String error) {
         // TODO update the viewmodel!
     }
+
+    @Override
+    public void switchToLoggedInView() {
+
+    }
 }

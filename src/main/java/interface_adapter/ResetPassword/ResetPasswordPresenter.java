@@ -5,47 +5,44 @@ import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import use_case.change_password.ChangePasswordOutputBoundary;
+import use_case.change_password.ChangePasswordOutputData;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
 /**
- * The Presenter for the Login Use Case.
+ * The Presenter for the Reset Password Use Case.
  */
-public class ResetPasswordPresenter implements LoginOutputBoundary {
+public class ResetPasswordPresenter implements ChangePasswordOutputBoundary {
 
     private final ResetPasswordViewModel resetPasswordViewModel;
-    private final LoggedInViewModel loggedInViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final LoggedInViewModel loggedInViewModel;
 
-    public ResetPasswordPresenter(ViewManagerModel viewManagerModel,
-                          LoggedInViewModel loggedInViewModel,
-                          ResetPasswordViewModel resetPasswordViewModel) {
+    public ResetPasswordPresenter(ViewManagerModel viewManagerModel, ResetPasswordViewModel resetPasswordViewModel,
+                                  LoggedInViewModel loggedInViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.loggedInViewModel = loggedInViewModel;
         this.resetPasswordViewModel = resetPasswordViewModel;
+        this.loggedInViewModel = loggedInViewModel;
     }
 
     @Override
-    public void prepareSuccessView(LoginOutputData response) {
-        // On success, switch to the logged in view.
+    public void prepareSuccessView(ChangePasswordOutputData outputData) {
+        // TODO update the viewmodel!
+        resetPasswordViewModel.firePropertyChanged("password");
 
-        final LoggedInState loggedInState = loggedInViewModel.getState();
-        loggedInState.setUsername(response.getUsername());
-        this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
-
-        this.viewManagerModel.setState(loggedInViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
+        // TODO update the viewmodel!
     }
 
     @Override
-    public void switchToSignupView() {
-
+    public void switchToLoggedInView() {
+        viewManagerModel.setState(loggedInViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
-
 }
+
 
