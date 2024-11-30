@@ -1,8 +1,7 @@
-package data_access;
+package data_access.serialization;
 
 import entity.MultipleChoiceQuestion;
 import entity.Question;
-import entity.TextQuestion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

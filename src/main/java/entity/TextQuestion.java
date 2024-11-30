@@ -14,4 +14,9 @@ public class TextQuestion extends Question {
     public boolean validateAnswer(Answer answer) {
         return answer.getUserInput().length == 1;
     }
+
+    @Override
+    public boolean answerIsEmpty(Answer answer) {
+        return answer.getUserInput()[0].isEmpty();
+    }
 }

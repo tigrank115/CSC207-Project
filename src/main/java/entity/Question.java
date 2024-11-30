@@ -26,5 +26,5 @@ public abstract class Question {
 
     // We assume the Answer's AnswerType matches that of the question.
     public abstract boolean validateAnswer(Answer answer);
-
+    public abstract boolean answerIsEmpty(Answer answer);
 }
