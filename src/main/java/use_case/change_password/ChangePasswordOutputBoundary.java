@@ -1,5 +1,8 @@
 package use_case.change_password;
 
+import use_case.login.LoginInputData;
+import use_case.login.LoginOutputData;
+
 /**
  * The output boundary for the Change Password Use Case.
  */
@@ -17,4 +20,6 @@ public interface ChangePasswordOutputBoundary {
     void prepareFailView(String errorMessage);
 
     void switchToLoggedInView();
+
+    void switchToResetPasswordView(LoginOutputData loginOutputData);
 }

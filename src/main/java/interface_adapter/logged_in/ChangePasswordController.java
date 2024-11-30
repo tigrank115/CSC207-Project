@@ -2,6 +2,7 @@ package interface_adapter.logged_in;
 
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInputData;
+import use_case.login.LoginInputData;
 
 /**
  * Controller for the Change Password Use Case.
@@ -26,5 +27,12 @@ public class ChangePasswordController {
 
     public void switchToLoggedInView() {
         userChangePasswordUseCaseInteractor.switchToLoggedInView();
+    }
+
+    public void switchToResetPasswordView(String password, String username) {
+        final LoginInputData loginInputData = new LoginInputData(
+                username, password);
+
+        userChangePasswordUseCaseInteractor.switchToResetPasswordView(loginInputData);
     }
 }

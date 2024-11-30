@@ -7,6 +7,7 @@ import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import use_case.change_password.ChangePasswordOutputBoundary;
 import use_case.change_password.ChangePasswordOutputData;
+import use_case.login.LoginInputData;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
@@ -42,6 +43,17 @@ public class ResetPasswordPresenter implements ChangePasswordOutputBoundary {
     public void switchToLoggedInView() {
         viewManagerModel.setState(loggedInViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToResetPasswordView(LoginOutputData response) {
+        final ResetPasswordState resetPasswordState = resetPasswordViewModel.getState();
+        resetPasswordState.setUsername(response.getUsername());
+        this.resetPasswordViewModel.setState(resetPasswordState);
+        this.resetPasswordViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setState(resetPasswordViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 }
 

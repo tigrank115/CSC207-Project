@@ -18,6 +18,7 @@ import javax.swing.event.DocumentListener;
 import interface_adapter.logged_in.ChangePasswordController;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.login.LoginState;
 
 /**
  * The View for when the user is logged into the program.
@@ -86,15 +87,14 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         });
 
         changePassword.addActionListener(
-                // This creates an anonymous subclass of ActionListener and instantiates it.
-                evt -> {
-                    if (evt.getSource().equals(changePassword)) {
-                        final LoggedInState currentState = loggedInViewModel.getState();
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(changePassword)) {
+                            final LoggedInState currentState = loggedInViewModel.getState();
 
-                        this.changePasswordController.execute(
-                                currentState.getUsername(),
-                                currentState.getPassword()
-                        );
+                            changePasswordController.switchToResetPasswordView(currentState.getPassword(),
+                                    currentState.getUsername());
+                        }
                     }
                 }
         );

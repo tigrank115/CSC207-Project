@@ -12,6 +12,7 @@ import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
 import use_case.change_password.ChangePasswordUserDataAccessInterface;
+import use_case.login.LoginUserDataAccessInterface;
 import view.LoggedInView;
 import view.ResetPasswordView;
 
@@ -36,12 +37,13 @@ public final class ResetPasswordUseCaseFactory {
             ViewManagerModel viewManagerModel,
             ResetPasswordViewModel resetPasswordViewModel,
             LoggedInViewModel loggedInViewModel,
-            ChangePasswordUserDataAccessInterface userDataAccessObject) {
+            ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
+            LoginUserDataAccessInterface userDataAccessObject) {
 
         final ChangePasswordController changePasswordController =
                 createResetPasswordUseCase(viewManagerModel, resetPasswordViewModel,
-                        loggedInViewModel, userDataAccessObject);
-        return new ResetPasswordView(resetPasswordViewModel, changePasswordController);
+                        loggedInViewModel, userDataAccessObject, resetUserDataAccessObject);
+        return new ResetPasswordView(loggedInViewModel, resetPasswordViewModel, changePasswordController);
 
     }
 
@@ -49,7 +51,8 @@ public final class ResetPasswordUseCaseFactory {
             ViewManagerModel viewManagerModel,
             ResetPasswordViewModel resetPasswordViewModel,
             LoggedInViewModel loggedInViewModel,
-            ChangePasswordUserDataAccessInterface userDataAccessObject) {
+            LoginUserDataAccessInterface userDataAccessObject,
+            ChangePasswordUserDataAccessInterface resetUserDataAccessObject) {
 
         // Notice how we pass this method's parameters through to the Presenter.
         final ChangePasswordOutputBoundary changePasswordOutputBoundary = new ResetPasswordPresenter(viewManagerModel,
@@ -58,7 +61,8 @@ public final class ResetPasswordUseCaseFactory {
         final UserFactory userFactory = new CommonUserFactory();
 
         final ChangePasswordInputBoundary changePasswordInteractor =
-                new ChangePasswordInteractor(userDataAccessObject, changePasswordOutputBoundary, userFactory);
+                new ChangePasswordInteractor(userDataAccessObject, resetUserDataAccessObject,
+                        changePasswordOutputBoundary, userFactory);
 
         return new ChangePasswordController(changePasswordInteractor);
     }

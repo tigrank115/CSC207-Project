@@ -19,6 +19,8 @@ import interface_adapter.ResetPassword.ResetPasswordState;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.logged_in.ChangePasswordController;
 import interface_adapter.logged_in.LoggedInState;
+import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.login.LoginState;
 
 /**
  * The View for when the user is logged into the program.
@@ -37,17 +39,18 @@ public class ResetPasswordView extends JPanel implements ActionListener, Propert
     private final JTextField passwordInputField = new JTextField(15);
     private final JButton changePassword;
 
-    public ResetPasswordView(ResetPasswordViewModel resetPasswordViewModel,
+    public ResetPasswordView(LoggedInViewModel loggedInViewModel,
+                             ResetPasswordViewModel resetPasswordViewModel,
                              ChangePasswordController changePasswordController) {
         this.resetPasswordViewModel = resetPasswordViewModel;
         this.resetPasswordViewModel.addPropertyChangeListener(this);
         this.changePasswordController = changePasswordController;
 
-        final JLabel title = new JLabel("Reset Password Screen");
+        final JLabel title = new JLabel("Reset Your Password");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         final LabelTextPanel passwordInfo = new LabelTextPanel(
-                new JLabel("Password"), passwordInputField);
+                new JLabel("New Password"), passwordInputField);
 
         final JLabel usernameInfo = new JLabel("Currently logged in: ");
         username = new JLabel();
@@ -93,15 +96,16 @@ public class ResetPasswordView extends JPanel implements ActionListener, Propert
         });
 
         changePassword.addActionListener(
-                // This creates an anonymous subclass of ActionListener and instantiates it.
-                evt -> {
-                    if (evt.getSource().equals(changePassword)) {
-                        final ResetPasswordState currentState = resetPasswordViewModel.getState();
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(changePassword)) {
+                            final ResetPasswordState currentState = resetPasswordViewModel.getState();
 
-                        this.changePasswordController.execute(
-                                currentState.getUsername(),
-                                currentState.getPassword()
-                        );
+                            changePasswordController.execute(
+                                    currentState.getUsername(),
+                                    currentState.getPassword()
+                            );
+                        }
                     }
                 }
         );
@@ -126,11 +130,11 @@ public class ResetPasswordView extends JPanel implements ActionListener, Propert
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
-            final LoggedInState state = (LoggedInState) evt.getNewValue();
+            final ResetPasswordState state = (ResetPasswordState) evt.getNewValue();
             username.setText(state.getUsername());
         }
         else if (evt.getPropertyName().equals("password")) {
-            final LoggedInState state = (LoggedInState) evt.getNewValue();
+            final ResetPasswordState state = (ResetPasswordState) evt.getNewValue();
             JOptionPane.showMessageDialog(null, "password updated for " + state.getUsername());
         }
 

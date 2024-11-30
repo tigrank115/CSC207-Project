@@ -62,15 +62,15 @@ public class MainWithDB {
                 signupViewModel, userDataAccessObject);
         views.add(loginView, loginView.getViewName());
 
-        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel,
-                                                                              loggedInViewModel, userDataAccessObject);
+        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
+                resetPasswordViewModel, userDataAccessObject, userDataAccessObject);
         views.add(loggedInView, loggedInView.getViewName());
 
         final ResetPasswordView resetPasswordView = ResetPasswordUseCaseFactory.create(viewManagerModel,
-                resetPasswordViewModel, loggedInViewModel, userDataAccessObject);
+                resetPasswordViewModel, loggedInViewModel, userDataAccessObject, userDataAccessObject);
         views.add(resetPasswordView, resetPasswordView.getViewName());
 
-        viewManagerModel.setState(resetPasswordView.getViewName());
+        viewManagerModel.setState(signupView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         application.pack();
