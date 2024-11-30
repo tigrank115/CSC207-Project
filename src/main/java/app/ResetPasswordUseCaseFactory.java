@@ -2,12 +2,12 @@ package app;
 
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.ResetPassword.ResetPasswordPresenter;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.ChangePasswordController;
 import interface_adapter.logged_in.LoggedInPresenter;
 import interface_adapter.logged_in.LoggedInViewModel;
-import interface_adapter.login.LoginViewModel;
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
@@ -19,46 +19,44 @@ import view.ResetPasswordView;
 /**
  * This class contains the static factory function for creating the LoggedInView.
  */
-public final class ChangePasswordUseCaseFactory {
+public final class ResetPasswordUseCaseFactory {
 
     /** Prevent instantiation. */
-    private ChangePasswordUseCaseFactory() {
+    private ResetPasswordUseCaseFactory() {
 
     }
 
     /**
      * Factory function for creating the LoggedInView.
-     * @param viewManagerModel the ViewManagerModel to inject into the LoggedInView
-     * @param loggedInViewModel the loggedInViewModel to inject into the LoggedInView
-     * @param userDataAccessObject the ChangePasswordUserDataAccessInterface to inject into the LoggedInView
+     * @param viewManagerModel the ViewManagerModel to inject into the ResetPasswordView
+     * @param resetPasswordViewModel the resetPasswordViewModel to inject into the ResetPasswordView
+     * @param userDataAccessObject the ChangePasswordUserDataAccessInterface to inject into the ResetPasswordView
      * @return the LoggedInView created for the provided input classes
      */
-    public static LoggedInView create(
+    public static ResetPasswordView create(
             ViewManagerModel viewManagerModel,
-            LoggedInViewModel loggedInViewModel,
             ResetPasswordViewModel resetPasswordViewModel,
+            LoggedInViewModel loggedInViewModel,
             ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
-            LoginUserDataAccessInterface userDataAccessObject,
-            LoginViewModel loginViewModel) {
+            LoginUserDataAccessInterface userDataAccessObject) {
 
         final ChangePasswordController changePasswordController =
-                    createChangePasswordUseCase(viewManagerModel, loggedInViewModel, resetPasswordViewModel,
-                            userDataAccessObject, resetUserDataAccessObject, loginViewModel);
-        return new LoggedInView(loggedInViewModel, changePasswordController);
+                createResetPasswordUseCase(viewManagerModel, resetPasswordViewModel,
+                        loggedInViewModel, userDataAccessObject, resetUserDataAccessObject);
+        return new ResetPasswordView(loggedInViewModel, resetPasswordViewModel, changePasswordController);
 
     }
 
-    private static ChangePasswordController createChangePasswordUseCase(
+    private static ChangePasswordController createResetPasswordUseCase(
             ViewManagerModel viewManagerModel,
-            LoggedInViewModel loggedInViewModel,
             ResetPasswordViewModel resetPasswordViewModel,
+            LoggedInViewModel loggedInViewModel,
             LoginUserDataAccessInterface userDataAccessObject,
-            ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
-            LoginViewModel loginViewModel) {
+            ChangePasswordUserDataAccessInterface resetUserDataAccessObject) {
 
         // Notice how we pass this method's parameters through to the Presenter.
-        final ChangePasswordOutputBoundary changePasswordOutputBoundary = new LoggedInPresenter(viewManagerModel,
-                loggedInViewModel, resetPasswordViewModel, loginViewModel);
+        final ChangePasswordOutputBoundary changePasswordOutputBoundary = new ResetPasswordPresenter(viewManagerModel,
+                resetPasswordViewModel, loggedInViewModel);
 
         final UserFactory userFactory = new CommonUserFactory();
 
@@ -69,3 +67,4 @@ public final class ChangePasswordUseCaseFactory {
         return new ChangePasswordController(changePasswordInteractor);
     }
 }
+

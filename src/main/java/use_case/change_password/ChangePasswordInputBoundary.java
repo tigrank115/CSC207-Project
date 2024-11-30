@@ -1,5 +1,7 @@
 package use_case.change_password;
 
+import use_case.login.LoginInputData;
+
 /**
  * The Change Password Use Case.
  */
@@ -11,4 +13,9 @@ public interface ChangePasswordInputBoundary {
      */
     void execute(ChangePasswordInputData changePasswordInputData);
 
+    void switchToLoggedInView();
+
+    void switchToResetPasswordView(LoginInputData loginInputData);
+
+    void switchToLoginView();
 }
