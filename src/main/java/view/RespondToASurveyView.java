@@ -61,7 +61,7 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
                                                 final RespondToASurveyState currentState = respondtoasurveyViewModel.getState();
 
                                                 respondtoasurveyController.execute(
-                                                        currentState.getSurvey()
+                           //                             currentState.getSurvey()
                                                 );
                                         }
                                 }

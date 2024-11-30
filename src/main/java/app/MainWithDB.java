@@ -5,17 +5,21 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-
 import data_access.DBUserDataAccessObject;
+import data_access.InMemorySurveyDataAccessObject;
 import entity.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.respond.RespondToASurveyController;
+import interface_adapter.respond.RespondToASurveyPresenter;
+import interface_adapter.respond.RespondToASurveyViewModel;
 import interface_adapter.signup.SignupViewModel;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
+import interface_adapter.surveyresponse.SurveyResponseViewModel;
+import use_case.get_survey.GetSurveyInputBoundary;
+import use_case.get_survey.GetSurveyInteractor;
+import use_case.get_survey.GetSurveyOutputBoundary;
+import view.*;
 
 /**
  * The version of Main with an external database used to persist user data.
@@ -67,7 +71,17 @@ public class MainWithDB {
                                                                               loggedInViewModel, userDataAccessObject);
         views.add(loggedInView, loggedInView.getViewName());
 
-        viewManagerModel.setState(signupView.getViewName());
+        InMemorySurveyDataAccessObject dbSurveyDAO = new InMemorySurveyDataAccessObject();
+        SurveyResponseViewModel responseVM = new SurveyResponseViewModel("survey response");
+        final RespondToASurveyViewModel idVM = new RespondToASurveyViewModel();
+        final GetSurveyOutputBoundary idPres = new RespondToASurveyPresenter(viewManagerModel, responseVM, idVM);
+        final GetSurveyInputBoundary getSurveyInteractor = new GetSurveyInteractor(dbSurveyDAO, idPres);
+        final RespondToASurveyController idController = new RespondToASurveyController(getSurveyInteractor);
+        final RespondToASurveyView idView = new RespondToASurveyView(idController, idVM);
+
+        views.add(idView, idView.getViewName());
+
+        viewManagerModel.setState(idView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         application.pack();
