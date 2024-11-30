@@ -4,7 +4,6 @@ import entity.Answer;
 import entity.Question;
 import entity.Response;
 import entity.Survey;
-import use_case.get_survey.GetSurveyDataAccessInterface;
 
 public class MakeResponseInteractor implements MakeResponseInputBoundary {
 
@@ -16,11 +15,6 @@ public class MakeResponseInteractor implements MakeResponseInputBoundary {
                                   MakeResponseOutputBoundary presenter) {
         this.responseDAO = responseDAO;
         this.presenter = presenter;
-    }
-
-    private void validate(MakeResponseInputData inputData) {
-
-
     }
 
     @Override

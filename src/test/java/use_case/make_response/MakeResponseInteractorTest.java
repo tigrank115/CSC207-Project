@@ -1,11 +1,9 @@
 package use_case.make_response;
 
 import data_access.InMemorySurveyDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
 import entity.*;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -15,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class MakeResponseInteractorTest {
     @Test
-    public void makeResponseTest() {
+    public void makeResponseSuccessTest() {
         Survey survey = new Survey("Mood Survey");
         survey.addQuestion(new MultipleChoiceQuestion(
                 "How are you?",

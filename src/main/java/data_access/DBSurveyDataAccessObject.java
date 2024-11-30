@@ -8,17 +8,21 @@ import data_access.serialization.SurveySerializer;
 import entity.Response;
 import entity.Survey;
 import org.json.JSONObject;
+import use_case.get_responses.GetResponsesDataAccessInterface;
 import use_case.get_survey.GetSurveyDataAccessInterface;
 import use_case.make_response.MakeResponseDataAccessInterface;
 import use_case.upload_survey.UploadSurveyDataAccessInterface;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class DBSurveyDataAccessObject implements
         UploadSurveyDataAccessInterface,
         GetSurveyDataAccessInterface,
-        MakeResponseDataAccessInterface {
+        MakeResponseDataAccessInterface,
+        GetResponsesDataAccessInterface {
 
     public DBSurveyDataAccessObject() {
     }
@@ -70,5 +74,36 @@ public class DBSurveyDataAccessObject implements
         // Create default empty collection if necessary.
         JSONObject responseObject = ResponseSerializer.responseToJson(response);
         ref.collection("responses").add(responseObject);
+    }
+
+    @Override
+    public List<Response> getResponses(String surveyId) {
+        ApiFuture<QuerySnapshot> querySnapshot =
+                FirebaseConnectionFactory.getFirestore()
+                        .collection("surveys")
+                        .document(surveyId)
+                        .collection("responses")
+                        .get();
+
+        try {
+            if (querySnapshot.get().isEmpty()) {
+                // Survey isn't popular enough for collection to have been automatically generated
+                return new ArrayList<>();
+            }
+
+            ArrayList<Response> responses = new ArrayList<>();
+
+            // Extract everything!
+            querySnapshot.get().getDocuments().forEach(documentSnapshot -> {
+                JSONObject responseObject = new JSONObject(documentSnapshot.getData());
+                responses.add(ResponseSerializer.jsonToResponse(responseObject));
+            });
+
+            return responses;
+        }
+        catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

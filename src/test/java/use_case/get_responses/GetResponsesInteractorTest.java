@@ -3,12 +3,7 @@ package use_case.get_responses;
 import data_access.DBSurveyDataAccessObject;
 import data_access.InMemorySurveyDataAccessObject;
 import entity.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import use_case.make_response.MakeResponseInputData;
-import use_case.make_response.MakeResponseInteractor;
-import use_case.make_response.MakeResponseOutputBoundary;
-import use_case.make_response.MakeResponseOutputData;
 
 import java.util.ArrayList;
 import java.util.Arrays;

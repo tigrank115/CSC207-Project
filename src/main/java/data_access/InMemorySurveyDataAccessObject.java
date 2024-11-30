@@ -2,6 +2,7 @@ package data_access;
 
 import entity.Response;
 import entity.Survey;
+import use_case.get_responses.GetResponsesDataAccessInterface;
 import use_case.get_survey.GetSurveyDataAccessInterface;
 import use_case.make_response.MakeResponseDataAccessInterface;
 import use_case.upload_survey.UploadSurveyDataAccessInterface;
@@ -14,7 +15,8 @@ import java.util.Map;
 public class InMemorySurveyDataAccessObject implements
         UploadSurveyDataAccessInterface,
         GetSurveyDataAccessInterface,
-        MakeResponseDataAccessInterface {
+        MakeResponseDataAccessInterface,
+        GetResponsesDataAccessInterface {
 
     private Map<String, Survey> surveyCollection;
     private Map<String, List<Response>> responseCollection;
@@ -50,5 +52,13 @@ public class InMemorySurveyDataAccessObject implements
             responseCollection.put(surveyId, new ArrayList<>());
         }
         responseCollection.get(surveyId).add(response);
+    }
+
+    @Override
+    public List<Response> getResponses(String surveyId) {
+        if (!responseCollection.containsKey(surveyId)) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(responseCollection.get(surveyId));
     }
 }

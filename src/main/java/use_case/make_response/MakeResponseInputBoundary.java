@@ -1,6 +1,5 @@
 package use_case.make_response;
 
-import use_case.make_response.MakeResponseInputData;
 
 public interface MakeResponseInputBoundary {
     /**

@@ -1,8 +1,6 @@
 package use_case.get_responses;
 
 import entity.Response;
-import use_case.make_response.MakeResponseInputData;
-import use_case.make_response.MakeResponseOutputData;
 
 import java.util.List;
 
