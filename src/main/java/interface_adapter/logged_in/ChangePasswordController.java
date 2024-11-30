@@ -35,4 +35,8 @@ public class ChangePasswordController {
 
         userChangePasswordUseCaseInteractor.switchToResetPasswordView(loginInputData);
     }
+
+    public void switchToLoginView() {
+        userChangePasswordUseCaseInteractor.switchToLoginView();
+    }
 }

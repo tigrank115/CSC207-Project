@@ -55,6 +55,11 @@ public class ResetPasswordPresenter implements ChangePasswordOutputBoundary {
         this.viewManagerModel.setState(resetPasswordViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void switchToLoginView() {
+
+    }
 }
 
 

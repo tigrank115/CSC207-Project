@@ -3,6 +3,7 @@ package interface_adapter.logged_in;
 import interface_adapter.ResetPassword.ResetPasswordState;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.login.LoginViewModel;
 import use_case.change_password.ChangePasswordOutputBoundary;
 import use_case.change_password.ChangePasswordOutputData;
 import use_case.login.LoginInputData;
@@ -16,12 +17,14 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
     private final LoggedInViewModel loggedInViewModel;
     private final ResetPasswordViewModel resetPasswordViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final LoginViewModel loginViewModel;
 
-    public LoggedInPresenter(ViewManagerModel viewManagerModel,
-                             LoggedInViewModel loggedInViewModel, ResetPasswordViewModel resetPasswordViewModel) {
+    public LoggedInPresenter(ViewManagerModel viewManagerModel, LoggedInViewModel loggedInViewModel,
+                             ResetPasswordViewModel resetPasswordViewModel, LoginViewModel loginViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.loggedInViewModel = loggedInViewModel;
         this.resetPasswordViewModel = resetPasswordViewModel;
+        this.loginViewModel = loginViewModel;
     }
 
     @Override
@@ -50,5 +53,12 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
 
         this.viewManagerModel.setState(resetPasswordViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToLoginView() {
+        viewManagerModel.setState(loginViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+
     }
 }

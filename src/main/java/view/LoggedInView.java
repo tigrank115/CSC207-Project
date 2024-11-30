@@ -45,8 +45,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         final JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        final LabelTextPanel passwordInfo = new LabelTextPanel(
-                new JLabel("Password"), passwordInputField);
 
         final JLabel usernameInfo = new JLabel("Currently logged in: ");
         username = new JLabel();
@@ -58,7 +56,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         changePassword = new JButton("Change Password");
         buttons.add(changePassword);
 
-        logOut.addActionListener(this);
+        logOut.addActionListener(                new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                changePasswordController.switchToLoginView();
+            }
+        });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -103,7 +105,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(usernameInfo);
         this.add(username);
 
-        this.add(passwordInfo);
         this.add(passwordErrorField);
         this.add(buttons);
     }

@@ -16,4 +16,6 @@ public interface ChangePasswordInputBoundary {
     void switchToLoggedInView();
 
     void switchToResetPasswordView(LoginInputData loginInputData);
+
+    void switchToLoginView();
 }
