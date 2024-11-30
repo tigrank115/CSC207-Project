@@ -1,5 +1,6 @@
 package data_access;
 
+import data_access.serialization.ResponseSerializer;
 import entity.Answer;
 import entity.AnswerType;
 import entity.Response;
