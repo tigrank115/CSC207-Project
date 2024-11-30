@@ -8,14 +8,12 @@ import javax.swing.WindowConstants;
 
 import data_access.DBUserDataAccessObject;
 import entity.CommonUserFactory;
+import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.SignupViewModel;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
+import view.*;
 
 /**
  * The version of Main with an external database used to persist user data.
@@ -51,6 +49,7 @@ public class MainWithDB {
         final LoginViewModel loginViewModel = new LoginViewModel();
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
+        final ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
 
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
         final DBUserDataAccessObject userDataAccessObject = new DBUserDataAccessObject(new CommonUserFactory());
@@ -59,13 +58,17 @@ public class MainWithDB {
                                                                   signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
-        final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
-                                                               loggedInViewModel, userDataAccessObject);
+        final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel,
+                signupViewModel, userDataAccessObject);
         views.add(loginView, loginView.getViewName());
 
-        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel,
-                                                                              loggedInViewModel, userDataAccessObject);
+        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
+                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel);
         views.add(loggedInView, loggedInView.getViewName());
+
+        final ResetPasswordView resetPasswordView = ResetPasswordUseCaseFactory.create(viewManagerModel,
+                resetPasswordViewModel, loggedInViewModel, userDataAccessObject, userDataAccessObject);
+        views.add(resetPasswordView, resetPasswordView.getViewName());
 
         viewManagerModel.setState(signupView.getViewName());
         viewManagerModel.firePropertyChanged();
