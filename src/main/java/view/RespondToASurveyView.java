@@ -41,7 +41,7 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
                 this.respondtoasurveyViewModel = respondtoasurveyViewModel;
                 respondtoasurveyViewModel.addPropertyChangeListener(this);
 
-                final JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
+                final JLabel title = new JLabel(RespondToASurveyViewModel.TITLE_LABEL);
                 title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
                 final LabelTextPanel idInfo = new LabelTextPanel(
