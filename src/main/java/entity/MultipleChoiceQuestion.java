@@ -43,4 +43,14 @@ public class MultipleChoiceQuestion extends Question {
         }
         return answer.getUserInput().length <= options.size();
     }
+
+    @Override
+    public boolean answerIsEmpty(Answer answer) {
+        for (String choice : answer.getUserInput()) {
+            if (!choice.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
