@@ -25,8 +25,16 @@ panels separate from the background.
 
 # Tolerance for Error 
 
-
+CreateSurvey has a Delete question function to delete a question in case the user makes mistakes, and when creating a 
+multiple choice question, has a "Delete" button next to each multiple choice option the user creates in case 
+the option is no longer needed. RespondToASurvey has a warning popup when an 
+invalid survey id is entered, and allows the user to try again. 
 
 #Low Physical Effort 
 
+All of our functions are organized in a linear navigation system, with no repetitive actions required except 
+during survey creation. Features are easy to distinguish and stand out from the background to reduce eye fatigue. 
+
 #Size and Space for Approach and Use 
+
+
