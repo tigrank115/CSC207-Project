@@ -14,7 +14,7 @@ Kevin Pogoryelovskyy : kevin.pogoryelovskyy@mail.utoronto.ca
 User Interface and design
 
 This application was created for the final group project of CSC207, 
-and is a survey application that allows a user to create and respond to surveys. 
+and is a survey application that allows a user to create and respond to surveys, and recieve a copy of their responses through an email API.
 
 # Table of Contents 
 Contributors - #Contributors 
@@ -32,6 +32,8 @@ CreateSurvey - Once logged in, the user has the option to create a new survey.
 RespondToASurvey - Once the user is logged in, they have the option to fetch an existing survey and respond to it. Upon choosing RespondToASurvey, they can fetch a survey by entering its 8-digit id code. If successful, the user is led to the survey. 
 
 GetMySurveys - Once logged in, the user has the option to see the surveys they have created on that account in a scrollpane, listed in from top to bottom with the newest survey at the top and the oldest at the bottom. If the user has not created any surveys on that account, the scrollpane will be empty. 
+
+SeeResponses - Once a user is on the GetMySurveys page (choosing GetMySurveys), the user can click the SeeResponses button beside each survey he has created, and see the responses other users have submitted on that survey. 
 
 # Installation Instructions 
 
