@@ -6,7 +6,6 @@ import interface_adapter.logged_in.LoggedInViewModel;
 import use_case.upload_survey.UploadSurveyOutputBoundary;
 import use_case.upload_survey.UploadSurveyOutputData;
 
-import java.lang.reflect.Constructor;
 
 public class CreateSurveyPresenter implements UploadSurveyOutputBoundary {
 

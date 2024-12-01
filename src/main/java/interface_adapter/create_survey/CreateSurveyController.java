@@ -51,7 +51,7 @@ public class CreateSurveyController {
         List<QuestionState> questionStates = state.getQuestionStates();
 
         // No questions, no survey
-        if (questionStates.size() == 0) {
+        if (questionStates.isEmpty()) {
             presenter.prepareFailView("No survey exists");
             return;
         }

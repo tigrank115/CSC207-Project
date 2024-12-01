@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class QuestionStateFactory {
-    private static Map<Class<? extends Question>, Class<? extends QuestionState>> questionStateMap = new HashMap<>();
+    private static final Map<Class<? extends Question>, Class<? extends QuestionState>> questionStateMap
+            = new HashMap<>();
 
     static {
         questionStateMap.put(TextQuestion.class, TextQuestionState.class);

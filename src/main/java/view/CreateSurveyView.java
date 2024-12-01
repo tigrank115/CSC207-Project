@@ -22,7 +22,7 @@ public class CreateSurveyView extends JPanel implements ActionListener, Property
     private final CreateSurveyController createSurveyController;
 
     private final JPanel questionPanels;
-    private JScrollPane questionScroller;
+    private final JScrollPane questionScroller;
 
 
     public CreateSurveyView(CreateSurveyViewModel createSurveyViewModel,
@@ -66,8 +66,7 @@ public class CreateSurveyView extends JPanel implements ActionListener, Property
         newQuestionButton = new JButton("New Question...");
         newQuestionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         newQuestionButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
+                evt -> {
                     String[] questionTypes = new String[]{
                             "TextQuestion",
                             "MultipleChoiceQuestion",
@@ -83,7 +82,6 @@ public class CreateSurveyView extends JPanel implements ActionListener, Property
 
                     createSurveyController.addQuestion(questionTypes[questionType]);
                 }
-            }
         );
 
         questionPanels = new JPanel();
@@ -108,9 +106,7 @@ public class CreateSurveyView extends JPanel implements ActionListener, Property
         submitButton.addActionListener(this);
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(e -> {
-            createSurveyController.switchToMainMenu();
-        });
+        cancelButton.addActionListener(e -> createSurveyController.switchToMainMenu());
         mainMenuPanel.add(submitButton);
         mainMenuPanel.add(cancelButton);
 
@@ -163,20 +159,11 @@ public class CreateSurveyView extends JPanel implements ActionListener, Property
             JCheckBox toggleRequired = new JCheckBox("Required?");
 
             int questionIndex = i;
-            deleteQuestionButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    createSurveyController.removeQuestion(questionIndex);
-                }
-            });
+            deleteQuestionButton.addActionListener(actionEvent -> createSurveyController.removeQuestion(questionIndex));
 
             toggleRequired.setSelected(qState.isRequired());
-            toggleRequired.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    createSurveyController.setRequired(questionIndex, toggleRequired.isSelected());
-                }
-            });
+            toggleRequired.addActionListener(actionEvent ->
+                    createSurveyController.setRequired(questionIndex, toggleRequired.isSelected()));
 
             editableQuestionPanel.add(new JLabel(String.format("Q%d", questionIndex + 1)));
             editableQuestionPanel.add(qState.createQuestionFrame(createSurveyController));

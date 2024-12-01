@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MultipleChoiceQuestionState extends QuestionState {
 
-    private List<String> options;
+    private final List<String> options;
     private boolean singleAnswer;
 
     public MultipleChoiceQuestionState() {
@@ -133,9 +133,7 @@ public class MultipleChoiceQuestionState extends QuestionState {
 
         JCheckBox toggleSingleAnswer = new JCheckBox("Single answer?");
 
-        toggleSingleAnswer.addActionListener(e -> {
-            setSingleAnswer(toggleSingleAnswer.isSelected());
-        });
+        toggleSingleAnswer.addActionListener(e -> setSingleAnswer(toggleSingleAnswer.isSelected()));
 
         masterPanel.add(promptInput);
         masterPanel.add(optionPanel);
