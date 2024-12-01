@@ -2,10 +2,15 @@
 
 # Contributors :
 Tigran : email here
+
 Database and API
+
 Matthew : email here 
+
 User Interface and design 
+
 kelvinpog : 
+
 User Interface and design
 
 This application was created for the final group project of CSC207, 
