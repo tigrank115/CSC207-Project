@@ -18,12 +18,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.ArrayList;
@@ -40,6 +35,7 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
     private final JLabel surveyTitle;
     private final List<JLabel> questionPrompts;
     private final List<JTextField> textAnswerFields;
+    private final List<List<JRadioButton>> multipleChoiceButtons;
 
 
     public SurveyResponseView(SurveyResponseController controller, SurveyResponseViewModel respondtoasurveyViewModel) {
@@ -57,11 +53,20 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
 
         questionPrompts = new ArrayList<>();
         textAnswerFields = new ArrayList<>();
+        multipleChoiceButtons = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             questionPrompts.add(new JLabel());
             JTextField textField = new JTextField(20);
             textField.setVisible(false);
             textAnswerFields.add(textField);
+
+            List<JRadioButton> buttonGrouping = new ArrayList();
+            for (int j = 0; j < 4; j++) {
+                JRadioButton radioButton = new JRadioButton();
+                radioButton.setVisible(false);
+                buttonGrouping.add(radioButton);
+            }
+            multipleChoiceButtons.add(buttonGrouping);
         }
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -71,6 +76,9 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
         for (int i = 0; i < questionPrompts.size(); i++) {
             this.add(questionPrompts.get(i));
             this.add(textAnswerFields.get(i));
+            for (JRadioButton radioButton : multipleChoiceButtons.get(i)) {
+                this.add(radioButton);
+            }
 
         }
 
@@ -93,9 +101,11 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
             questionPrompts.get(i).setAlignmentX(Component.CENTER_ALIGNMENT);
             if (state.getSurvey().getQuestions().get(i).getAnswerType().equals(AnswerType.TEXT)) {
                 textAnswerFields.get(i).setVisible(true);
-            }
-            else if (state.getSurvey().getQuestions().get(i).getAnswerType().equals(AnswerType.MULTIPLE_CHOICE)) {
-
+            } else  {
+                for (int j = 0; j < state.getSurvey().getQuestions().get(i).getOptions().size(); j++) {
+                    multipleChoiceButtons.get(i).get(j).setVisible(true);
+                    multipleChoiceButtons.get(i).get(j).setText(state.getSurvey().getQuestions().get(i).getOptions().get(j));
+                }
             }
         }
     }
