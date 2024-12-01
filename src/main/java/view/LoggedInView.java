@@ -36,6 +36,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     private final JTextField passwordInputField = new JTextField(15);
     private final JButton changePassword;
+    private final JButton respondSurvey;
 
     public LoggedInView(LoggedInViewModel loggedInViewModel, ChangePasswordController changePasswordController) {
         this.loggedInViewModel = loggedInViewModel;
@@ -55,6 +56,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         changePassword = new JButton("Change Password");
         buttons.add(changePassword);
+
+        respondSurvey = new JButton("Respond to a Survey");
+        buttons.add(respondSurvey);
 
         logOut.addActionListener(                new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -95,6 +99,19 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                             final LoggedInState currentState = loggedInViewModel.getState();
 
                             changePasswordController.switchToResetPasswordView(currentState.getPassword(),
+                                    currentState.getUsername());
+                        }
+                    }
+                }
+        );
+
+        respondSurvey.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(respondSurvey)) {
+                            final LoggedInState currentState = loggedInViewModel.getState();
+
+                            changePasswordController.switchToRespondSurveyView(currentState.getPassword(),
                                     currentState.getUsername());
                         }
                     }

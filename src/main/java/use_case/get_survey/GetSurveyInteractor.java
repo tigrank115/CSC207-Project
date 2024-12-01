@@ -25,4 +25,16 @@ public class GetSurveyInteractor implements GetSurveyInputBoundary {
         }
         getSurveyPresenter.prepareSuccessView(new GetSurveyOutputData(result));
     }
+
+    @Override
+    public void switchToResponseView(GetSurveyInputData inputData, String username) {
+        Survey result = surveyDAO.getSurvey(inputData.getRequestId());
+        if (result == null) {
+            getSurveyPresenter.prepareFailView("No survey found with id " + inputData.getRequestId() + ".");
+            return;
+        }
+        getSurveyPresenter.switchToResponseView(username, new GetSurveyOutputData(result));
+    }
+
+
 }

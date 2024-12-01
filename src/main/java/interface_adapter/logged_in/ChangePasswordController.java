@@ -39,4 +39,11 @@ public class ChangePasswordController {
     public void switchToLoginView() {
         userChangePasswordUseCaseInteractor.switchToLoginView();
     }
+
+    public void switchToRespondSurveyView(String password, String username) {
+        final LoginInputData loginInputData = new LoginInputData(
+                username, password);
+
+        userChangePasswordUseCaseInteractor.switchToRespondSurveyView(loginInputData);
+    }
 }

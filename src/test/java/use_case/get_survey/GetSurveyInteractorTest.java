@@ -46,10 +46,16 @@ public class GetSurveyInteractorTest {
             public void prepareFailView(String error) {
                 fail("Use case failure is unexpected.");
             }
+
+            @Override
+            public void switchToResponseView(String username, GetSurveyOutputData getSurveyOutputData) {
+
+            }
+
         };
 
         // Want to fetch the survey we just added (the only one in storage)
-        GetSurveyInputData inputData = new GetSurveyInputData("0");
+        GetSurveyInputData inputData = new GetSurveyInputData("randomusername","0");
 
         GetSurveyInteractor interactor = new GetSurveyInteractor(surveyRepository, successPresenter);
         interactor.execute(inputData);
@@ -72,10 +78,15 @@ public class GetSurveyInteractorTest {
             public void prepareFailView(String error) {
                 fail("Use case failure is unexpected.");
             }
+
+            @Override
+            public void switchToResponseView(String username, GetSurveyOutputData getSurveyOutputData) {
+
+            }
         };
 
         // Want to fetch the sample survey
-        GetSurveyInputData inputData = new GetSurveyInputData(SAMPLE_SURVEY_ID);
+        GetSurveyInputData inputData = new GetSurveyInputData("randomusername", SAMPLE_SURVEY_ID);
 
         GetSurveyInteractor interactor = new GetSurveyInteractor(surveyRepository, successPresenter);
         interactor.execute(inputData);

@@ -8,4 +8,6 @@ public interface GetSurveyInputBoundary {
      * @param inputData the input data for the Survey.
      */
     void execute(GetSurveyInputData inputData);
+
+    void switchToResponseView(GetSurveyInputData inputData, String username);
 }

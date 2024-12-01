@@ -60,6 +60,11 @@ public class ResetPasswordPresenter implements ChangePasswordOutputBoundary {
     public void switchToLoginView() {
 
     }
+
+    @Override
+    public void switchToRespondSurveyView(LoginOutputData loginOutputData) {
+
+    }
 }
 
 

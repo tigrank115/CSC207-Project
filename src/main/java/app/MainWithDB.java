@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
+import data_access.DBSurveyDataAccessObject;
 import data_access.DBUserDataAccessObject;
 import data_access.InMemorySurveyDataAccessObject;
 import entity.CommonUserFactory;
@@ -17,6 +19,7 @@ import interface_adapter.respond.RespondToASurveyPresenter;
 import interface_adapter.respond.RespondToASurveyViewModel;
 import interface_adapter.signup.SignupViewModel;
 
+import interface_adapter.surveyresponse.SurveyResponseController;
 import interface_adapter.surveyresponse.SurveyResponseViewModel;
 import use_case.get_survey.GetSurveyInputBoundary;
 import use_case.get_survey.GetSurveyInteractor;
@@ -38,7 +41,7 @@ public class MainWithDB {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        final JFrame application = new JFrame("Login Example");
+        final JFrame application = new JFrame("Survey");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         final CardLayout cardLayout = new CardLayout();
@@ -71,19 +74,26 @@ public class MainWithDB {
                 signupViewModel, userDataAccessObject);
         views.add(loginView, loginView.getViewName());
 
-        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
-                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel);
-        views.add(loggedInView, loggedInView.getViewName());
 
-        InMemorySurveyDataAccessObject dbSurveyDAO = new InMemorySurveyDataAccessObject();
-        SurveyResponseViewModel responseVM = new SurveyResponseViewModel("survey response");
+        DBSurveyDataAccessObject dbSurveyDAO = new DBSurveyDataAccessObject();
+        SurveyResponseViewModel responseVM = new SurveyResponseViewModel();
         final RespondToASurveyViewModel idVM = new RespondToASurveyViewModel();
         final GetSurveyOutputBoundary idPres = new RespondToASurveyPresenter(viewManagerModel, responseVM, idVM);
         final GetSurveyInputBoundary getSurveyInteractor = new GetSurveyInteractor(dbSurveyDAO, idPres);
         final RespondToASurveyController idController = new RespondToASurveyController(getSurveyInteractor);
-        final RespondToASurveyView idView = new RespondToASurveyView(idController, idVM);
 
+        final RespondToASurveyView idView = new RespondToASurveyView(idController, idVM);
         views.add(idView, idView.getViewName());
+
+        final SurveyResponseController surveyResponseController = new SurveyResponseController();
+
+        final SurveyResponseView surveyResponseView = new SurveyResponseView(surveyResponseController,
+                responseVM);
+        views.add(surveyResponseView, surveyResponseView.getViewName());
+
+        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
+                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel, idVM);
+        views.add(loggedInView, loggedInView.getViewName());
 
         final ResetPasswordView resetPasswordView = ResetPasswordUseCaseFactory.create(viewManagerModel,
                 resetPasswordViewModel, loggedInViewModel, userDataAccessObject, userDataAccessObject);

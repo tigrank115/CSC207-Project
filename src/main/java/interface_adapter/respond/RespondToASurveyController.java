@@ -1,6 +1,8 @@
 package interface_adapter.respond;
 
 import use_case.get_survey.GetSurveyInputBoundary;
+import use_case.get_survey.GetSurveyInputData;
+import use_case.login.LoginInputData;
 import use_case.make_response.MakeResponseInputBoundary;
 import use_case.make_response.MakeResponseInputData;
 import use_case.signup.SignupInputBoundary;
@@ -20,7 +22,12 @@ public class RespondToASurveyController {
     /**
      * Executes the Respond to a survey Use Case.
      */
-    public void execute() {
+    public void execute(String username, String surveyID) {
+        final GetSurveyInputData getSurveyInputData = new GetSurveyInputData(
+                username, surveyID);
+
+
+        userGetSurveyUseCaseInteractor.switchToResponseView(getSurveyInputData, username);
 
     }
 
