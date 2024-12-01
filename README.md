@@ -3,7 +3,7 @@
 # Contributors :
 Tigran Karapetyan : tigran.karapetyan@mail.utoronto.ca
 
-Database and API
+Database, API and User Interface
 
 Matthew Anthony Joseph DeMarinis : matthew.demarinis@mail.utoronto.ca
 
