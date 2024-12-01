@@ -36,6 +36,7 @@ GetMySurveys - Once logged in, the user has the option to see the surveys they h
 # Installation Instructions 
 
 To download, clone this repository to your computer via the URL link. 
+
 To run, go to src -> main -> java -> app -> MainWithDB and run MainWithDB. 
 
 # Usage guide 
