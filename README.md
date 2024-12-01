@@ -1,15 +1,15 @@
 # QUIKSURVEY
 
 # Contributors :
-Tigran : email here
+Tigran Karapetyan : tigran.karapetyan@mail.utoronto.ca
 
 Database and API
 
-Matthew : email here 
+Matthew Anthony Joseph DeMarinis : matthew.demarinis@mail.utoronto.ca
 
 User Interface and design 
 
-kelvinpog : 
+Kevin Pogoryelovskyy : kevin.pogoryelovskyy@mail.utoronto.ca
 
 User Interface and design
 
