@@ -33,11 +33,15 @@ RespondToASurvey - Once the user is logged in, they have the option to fetch an 
 
 GetMySurveys - Once logged in, the user has the option to see the surveys they have created on that account in a scrollpane, listed in from top to bottom with the newest survey at the top and the oldest at the bottom. If the user has not created any surveys on that account, the scrollpane will be empty. 
 
-
-
 # Installation Instructions 
 
+To download, clone this repository to your computer via the URL link. 
+To run, go to src -> main -> java -> app -> MainWithDB and run MainWithDB. 
+
 # Usage guide 
+Figure 1 - Main menu page. Make an account by choosing "Sign Up" and entering a username and a password, or login if you already have an account. Please note an account is necessary for using much of the application's features. Remember to record your login information! 
+
+Figure 2 - Logged In screen. Here, the user has options to use the application's features. 
 
 # License 
 
