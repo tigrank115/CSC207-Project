@@ -36,6 +36,7 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
     private final List<JLabel> questionPrompts;
     private final List<JTextField> textAnswerFields;
     private final List<List<JRadioButton>> multipleChoiceButtons;
+    private final JButton submit;
 
 
     public SurveyResponseView(SurveyResponseController controller, SurveyResponseViewModel respondtoasurveyViewModel) {
@@ -50,6 +51,9 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
         final JLabel titleInfo = new JLabel("Title of Survey:");
         titleInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
         surveyTitle = new JLabel();
+
+        submit = new JButton("Submit Response");
+        submit.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         questionPrompts = new ArrayList<>();
         textAnswerFields = new ArrayList<>();
@@ -69,6 +73,21 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
             multipleChoiceButtons.add(buttonGrouping);
         }
 
+//        submit.addActionListener(
+//                // This creates an anonymous subclass of ActionListener and instantiates it.
+//                new ActionListener() {
+//                    public void actionPerformed(ActionEvent evt) {
+//                        if (evt.getSource().equals(submit)) {
+//                            final SurveyResponseState currentState = surveyResponseViewModel.getState();
+//
+//                            surveyResponseController.execute(currentState.getUsername(),
+//                                    currentState.getSurveyID()
+//                            );
+//                        }
+//                    }
+//                }
+//        );
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(titleInfo);
@@ -81,6 +100,7 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
             }
 
         }
+        this.add(submit);
 
     }
 
@@ -104,6 +124,7 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
             } else  {
                 for (int j = 0; j < state.getSurvey().getQuestions().get(i).getOptions().size(); j++) {
                     multipleChoiceButtons.get(i).get(j).setVisible(true);
+                    multipleChoiceButtons.get(i).get(j).setAlignmentX(Component.CENTER_ALIGNMENT);
                     multipleChoiceButtons.get(i).get(j).setText(state.getSurvey().getQuestions().get(i).getOptions().get(j));
                 }
             }
