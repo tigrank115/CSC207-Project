@@ -12,9 +12,20 @@ customization of user experience at any time, and there is no stigmatization in 
 
 #Simple and Intuitive Use 
 
+Login/Signup have clear labels and required fields. GetMySurveys opens to an interface (a list of past surveys) that
+is easy to understand. RespondToASurvey leads to a minimal screen with clear functionality : OK and Back buttons and 
+an id input field. CreateSurvey has a top-down, intuitive survey creation UI starting with the survey title, then adding 
+questions one by one, then pressing "Submit" when all done. 
+
 # Perceptible Information 
 
+Unfortunately, our application only uses visual methods of information delivery, but ensures a contrast between 
+the background and essential information as all features have buttons and text fields with drawn borders, and
+panels separate from the background. 
+
 # Tolerance for Error 
+
+
 
 #Low Physical Effort 
 
