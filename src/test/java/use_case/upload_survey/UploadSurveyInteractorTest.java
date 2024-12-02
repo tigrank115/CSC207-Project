@@ -1,11 +1,9 @@
 package use_case.upload_survey;
 
 import data_access.InMemorySurveyDataAccessObject;
-import entity.*;
+import entity.Survey;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.Calendar;
+import use_case.SampleDataGenerator;
 
 import static org.junit.Assert.*;
 
@@ -16,21 +14,7 @@ public class UploadSurveyInteractorTest {
 
 
         // TODO: Mimic Lab 5 and create some factories for entity classes.
-        // TODO: This example Survey is everywhere, refactor somewhere.
-        Survey survey = new Survey("Mood Survey");
-        survey.addQuestion(new MultipleChoiceQuestion(
-                "How are you?",
-                Arrays.asList("Good", "So-so", "Bad"),
-                false,
-                true
-        ));
-        survey.addQuestion(new TextQuestion(
-                "Describe yourself.",
-                true
-        ));
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2025, Calendar.JANUARY, 1, 0, 0, 0);
-        survey.setCloseDate(calendar.getTime());
+        Survey survey = SampleDataGenerator.newSurvey();
 
         UploadSurveyInputData inputData = new UploadSurveyInputData(survey);
         UploadSurveyDataAccessInterface surveyRepository = new InMemorySurveyDataAccessObject();

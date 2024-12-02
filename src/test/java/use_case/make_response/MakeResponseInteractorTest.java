@@ -3,10 +3,8 @@ package use_case.make_response;
 import data_access.InMemorySurveyDataAccessObject;
 import entity.*;
 import org.junit.Test;
+import use_case.SampleDataGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
@@ -14,20 +12,7 @@ import static org.junit.Assert.*;
 public class MakeResponseInteractorTest {
     @Test
     public void makeResponseSuccessTest() {
-        Survey survey = new Survey("Mood Survey");
-        survey.addQuestion(new MultipleChoiceQuestion(
-                "How are you?",
-                Arrays.asList("Good", "So-so", "Bad"),
-                true,
-                true
-        ));
-        survey.addQuestion(new TextQuestion(
-                "Describe yourself.",
-                true
-        ));
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2025, Calendar.JANUARY, 1, 0, 0, 0);
-        survey.setCloseDate(calendar.getTime());
+        Survey survey = SampleDataGenerator.newSurvey();
 
         // Recall: this example implements MakeResponseDataAccessInterface.
         InMemorySurveyDataAccessObject responseDAO = new InMemorySurveyDataAccessObject();
@@ -36,10 +21,7 @@ public class MakeResponseInteractorTest {
         responseDAO.saveSurvey(survey);
 
         // Response-related setup
-        ArrayList<Answer> answers = new ArrayList<>();
-        answers.add(new Answer(AnswerType.SINGLE_CHOICE, new String[]{"Good"}));
-        answers.add(new Answer(AnswerType.TEXT, new String[]{"Everything is peachy."}));
-        Response response = new Response(answers);
+        Response response = SampleDataGenerator.newResponse();
 
         MakeResponseInputData inputData = new MakeResponseInputData(response, survey, "0");
         MakeResponseOutputBoundary successPresenter = new MakeResponseOutputBoundary() {
