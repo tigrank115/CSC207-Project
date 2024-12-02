@@ -1,0 +1,53 @@
+# Equitable Use 
+
+Login/Signup features are usable by anyone who can create and remember a username and password, and everyone is able to
+benefit from the comfort of security. Features that could improve this design principle are accomodations (such as question 
+read aloud features) that accomodate for the blind. 
+
+#Flexibility in Use
+
+User can use the features in any order they wish, and at any pace. Features such as Change Password allow for 
+customization of user experience at any time, and there is no stigmatization in any individual's abilities 
+(e.g. surveys are not timed, user session is not timed). 
+
+#Simple and Intuitive Use 
+
+Login/Signup have clear labels and required fields. GetMySurveys opens to an interface (a list of past surveys) that
+is easy to understand. RespondToASurvey leads to a minimal screen with clear functionality : OK and Back buttons and 
+an id input field. CreateSurvey has a top-down, intuitive survey creation UI starting with the survey title, then adding 
+questions one by one, then pressing "Submit" when all done. 
+
+# Perceptible Information 
+
+Unfortunately, our application only uses visual methods of information delivery, but ensures a contrast between 
+the background and essential information as all features have buttons and text fields with drawn borders, and
+panels separate from the background. 
+
+# Tolerance for Error 
+
+CreateSurvey has a Delete question function to delete a question in case the user makes mistakes, and when creating a 
+multiple choice question, has a "Delete" button next to each multiple choice option the user creates in case 
+the option is no longer needed. RespondToASurvey has a warning popup when an 
+invalid survey id is entered, and allows the user to try again. 
+
+#Low Physical Effort 
+
+All of our functions are organized in a linear navigation system, with no repetitive actions required except 
+during survey creation. Features are easy to distinguish and stand out from the background to reduce eye fatigue. 
+
+#Size and Space for Approach and Use 
+
+With access to a computer, a user can use our application with minimum physical exertion. Our application 
+requires a screen, keyboard and mouse to operate, and uses a simple typing and clicking interaction system. 
+
+Our application would mainly be marketed toward businesses, but could also be useful in fields such 
+as education. Our inspiration behind QuikSurvey was Google Forms, which is used in a variety of environments. 
+For example, a survey could be created by a manager to gather opinions from his employees, or a teacher gathering 
+requests from their students. In both cases, our application would allow them to easily distribute the survey as an 8-digit code,
+see responses as well as recieve email confirmation about who responded. Our goal was to make QuikSurvey a free service 
+that is accessible to anyone, as our belief was an easy-to-use questionaire system is useful in almost any area that 
+values fast collection of information in a secure environment. 
+
+
+
+
