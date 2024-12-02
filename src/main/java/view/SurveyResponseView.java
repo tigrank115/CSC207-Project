@@ -1,13 +1,6 @@
 package view;
 
 import entity.AnswerType;
-import entity.Question;
-import interface_adapter.respond.RespondToASurveyController;
-import interface_adapter.respond.RespondToASurveyState;
-import interface_adapter.respond.RespondToASurveyViewModel;
-import interface_adapter.signup.SignupController;
-import interface_adapter.signup.SignupState;
-import interface_adapter.signup.SignupViewModel;
 import interface_adapter.surveyresponse.SurveyResponseController;
 import interface_adapter.surveyresponse.SurveyResponseState;
 import interface_adapter.surveyresponse.SurveyResponseViewModel;
@@ -19,11 +12,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The View for the "Respond to a survey" case.
