@@ -73,6 +73,21 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
             multipleChoiceButtons.add(buttonGrouping);
         }
 
+        submit.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(submit)) {
+                            final SurveyResponseState currentState = surveyResponseViewModel.getState();
+
+//                            surveyResponseController.execute(currentState.getUsername(),
+//                                    currentState.getSurveyID()
+//                            );
+                        }
+                    }
+                }
+        );
+
 //        submit.addActionListener(
 //                // This creates an anonymous subclass of ActionListener and instantiates it.
 //                new ActionListener() {
@@ -80,9 +95,9 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
 //                        if (evt.getSource().equals(submit)) {
 //                            final SurveyResponseState currentState = surveyResponseViewModel.getState();
 //
-//                            surveyResponseController.execute(currentState.getUsername(),
-//                                    currentState.getSurveyID()
-//                            );
+////                            surveyResponseController.execute(currentState.getUsername(),
+////                                    currentState.getSurveyID()
+////                            );
 //                        }
 //                    }
 //                }
