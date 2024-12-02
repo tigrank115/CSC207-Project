@@ -26,4 +26,6 @@ public interface ChangePasswordOutputBoundary {
     void switchToLoginView();
 
     void switchToRespondSurveyView(LoginOutputData loginOutputData);
+
+    void switchToCreateSurveyView(LoginOutputData loginOutputData);
 }

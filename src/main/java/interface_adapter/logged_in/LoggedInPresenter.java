@@ -4,6 +4,8 @@ import interface_adapter.ResetPassword.ResetPasswordState;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.ViewModel;
+import interface_adapter.create_survey.CreateSurveyState;
+import interface_adapter.create_survey.CreateSurveyViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.respond.RespondToASurveyState;
 import interface_adapter.respond.RespondToASurveyViewModel;
@@ -22,15 +24,18 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
     private final ViewManagerModel viewManagerModel;
     private final LoginViewModel loginViewModel;
     private RespondToASurveyViewModel respondSurveyViewModel;
+    private CreateSurveyViewModel createSurveyViewModel;
 
     public LoggedInPresenter(ViewManagerModel viewManagerModel, LoggedInViewModel loggedInViewModel,
                              ResetPasswordViewModel resetPasswordViewModel, LoginViewModel loginViewModel,
-                             RespondToASurveyViewModel respondSurveyViewModel) {
+                             RespondToASurveyViewModel respondSurveyViewModel,
+                             CreateSurveyViewModel createSurveyViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.loggedInViewModel = loggedInViewModel;
         this.resetPasswordViewModel = resetPasswordViewModel;
         this.loginViewModel = loginViewModel;
         this.respondSurveyViewModel = respondSurveyViewModel;
+        this.createSurveyViewModel = createSurveyViewModel;
     }
 
     @Override
@@ -76,6 +81,17 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
         this.respondSurveyViewModel.firePropertyChanged();
 
         this.viewManagerModel.setState(respondSurveyViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToCreateSurveyView(LoginOutputData response) {
+//        final CreateSurveyState createSurveyState = createSurveyViewModel.getState();
+////        createSurveyState.setUsername(response.getUsername());
+////        this.respondSurveyViewModel.setState(respondSurveyState);
+////        this.respondSurveyViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setState(createSurveyViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 }

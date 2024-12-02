@@ -46,4 +46,11 @@ public class ChangePasswordController {
 
         userChangePasswordUseCaseInteractor.switchToRespondSurveyView(loginInputData);
     }
+
+    public void switchToCreateSurveyView(String password, String username) {
+        final LoginInputData loginInputData = new LoginInputData(
+                username, password);
+
+        userChangePasswordUseCaseInteractor.switchToCreateSurveyView(loginInputData);
+    }
 }
