@@ -21,7 +21,7 @@ public class SendConfirmationInteractor implements SendConfirmationInputBoundary
                 "QuikSurvey Team", inputData.getSurvey().getName());
 
         try {
-            confirmationDAO.sendConfirmationEmail(inputData.getUser(), messageBody);
+            confirmationDAO.sendConfirmationEmail(inputData.getUser(), inputData.getSurvey().getName(), messageBody);
             confirmationPresenter.prepareSuccessView(new SendConfirmationOutputData(
                     "A confirmation email has been sent to " + inputData.getUser().getEmailAddress(),
                     false));

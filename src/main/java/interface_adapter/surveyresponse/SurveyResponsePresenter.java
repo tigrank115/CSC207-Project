@@ -7,6 +7,11 @@ import use_case.send_confirmation.SendConfirmationOutputBoundary;
 import use_case.send_confirmation.SendConfirmationOutputData;
 
 public class SurveyResponsePresenter implements MakeResponseOutputBoundary, SendConfirmationOutputBoundary {
+
+    public SurveyResponsePresenter() {
+
+    }
+
     @Override
     public void prepareSuccessView(MakeResponseOutputData outputData) {
 
