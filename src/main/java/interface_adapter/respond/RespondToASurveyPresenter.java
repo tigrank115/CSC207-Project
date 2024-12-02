@@ -1,6 +1,7 @@
 package interface_adapter.respond;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.login.LoginState;
 import interface_adapter.signup.SignupState;
 import interface_adapter.surveyresponse.SurveyResponseState;
@@ -45,13 +46,21 @@ public class RespondToASurveyPresenter extends Component implements GetSurveyOut
 
     public void prepareFailView(String error) {
         final RespondToASurveyState respondtoasurveyState = respondtoasurveyViewModel.getState();
-        JOptionPane.showMessageDialog(this, "Invalid ID.");
+        respondtoasurveyState.setSurveyIDError(error);
         respondtoasurveyViewModel.firePropertyChanged();
     }
 
-    public void switchToSurveyResponseView() {
-        viewManagerModel.setState(respondtoasurveyViewModel.getViewName());
+    @Override
+    public void switchToResponseView(String username, GetSurveyOutputData getSurveyOutputData) {
+        final SurveyResponseState surveyResponseState = surveyresponseViewModel.getState();
+        surveyResponseState.setUsername(username);
+        surveyResponseState.setSurvey(getSurveyOutputData.getFetchedSurvey());
+        this.surveyresponseViewModel.setState(surveyResponseState);
+        this.surveyresponseViewModel.firePropertyChanged();
+
+        viewManagerModel.setState(surveyresponseViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
+
 
 }

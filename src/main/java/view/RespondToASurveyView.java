@@ -26,11 +26,12 @@ import javax.swing.event.DocumentListener;
  * The View for the "Respond to a survey" case.
  */
 public class RespondToASurveyView extends JPanel implements ActionListener, PropertyChangeListener {
-        private final String viewName = "responding to a survey";
+        private final String viewName = "respond to a survey";
 
         private final RespondToASurveyViewModel respondtoasurveyViewModel;
-        private final JTextField idInputField = new JTextField(15);
+        private final JTextField idInputField = new JTextField(20);
         private final RespondToASurveyController respondtoasurveyController;
+        private final JLabel surveyErrorField = new JLabel();
 
         private final JButton ok;
         private final JButton cancel;
@@ -60,8 +61,8 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
                                         if (evt.getSource().equals(ok)) {
                                                 final RespondToASurveyState currentState = respondtoasurveyViewModel.getState();
 
-                                                respondtoasurveyController.execute(
-                           //                             currentState.getSurvey()
+                                                respondtoasurveyController.execute(currentState.getUsername(),
+                                                        currentState.getSurveyID()
                                                 );
                                         }
                                 }
@@ -75,6 +76,7 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
                 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
                 this.add(title);
                 this.add(idInfo);
+                this.add(surveyErrorField);
                 this.add(buttons);
 
         }
@@ -83,6 +85,7 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
 
                         private void documentListenerHelper() {
                                 final RespondToASurveyState currentState = respondtoasurveyViewModel.getState();
+                                currentState.setSurveyID(idInputField.getText());
                                 respondtoasurveyViewModel.setState(currentState);
                         }
 
@@ -110,10 +113,8 @@ public class RespondToASurveyView extends JPanel implements ActionListener, Prop
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-                final SignupState state = (SignupState) evt.getNewValue();
-                if (state.getUsernameError() != null) {
-                        JOptionPane.showMessageDialog(this, state.getUsernameError());
-                }
+                final RespondToASurveyState state = (RespondToASurveyState) evt.getNewValue();
+                surveyErrorField.setText(state.getSurveyIDError());
         }
 
         public String getViewName() {

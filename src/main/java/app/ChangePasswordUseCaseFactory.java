@@ -8,6 +8,7 @@ import interface_adapter.logged_in.ChangePasswordController;
 import interface_adapter.logged_in.LoggedInPresenter;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.respond.RespondToASurveyViewModel;
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
@@ -39,11 +40,12 @@ public final class ChangePasswordUseCaseFactory {
             ResetPasswordViewModel resetPasswordViewModel,
             ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
             LoginUserDataAccessInterface userDataAccessObject,
-            LoginViewModel loginViewModel) {
+            LoginViewModel loginViewModel,
+            RespondToASurveyViewModel respondSurveyViewModel) {
 
         final ChangePasswordController changePasswordController =
                     createChangePasswordUseCase(viewManagerModel, loggedInViewModel, resetPasswordViewModel,
-                            userDataAccessObject, resetUserDataAccessObject, loginViewModel);
+                            userDataAccessObject, resetUserDataAccessObject, loginViewModel, respondSurveyViewModel);
         return new LoggedInView(loggedInViewModel, changePasswordController);
 
     }
@@ -54,11 +56,12 @@ public final class ChangePasswordUseCaseFactory {
             ResetPasswordViewModel resetPasswordViewModel,
             LoginUserDataAccessInterface userDataAccessObject,
             ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
-            LoginViewModel loginViewModel) {
+            LoginViewModel loginViewModel,
+            RespondToASurveyViewModel respondSurveyViewModel) {
 
         // Notice how we pass this method's parameters through to the Presenter.
         final ChangePasswordOutputBoundary changePasswordOutputBoundary = new LoggedInPresenter(viewManagerModel,
-                loggedInViewModel, resetPasswordViewModel, loginViewModel);
+                loggedInViewModel, resetPasswordViewModel, loginViewModel, respondSurveyViewModel);
 
         final UserFactory userFactory = new CommonUserFactory();
 

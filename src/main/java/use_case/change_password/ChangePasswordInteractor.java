@@ -59,4 +59,17 @@ public class ChangePasswordInteractor implements ChangePasswordInputBoundary {
     public void switchToLoginView() {
         userPresenter.switchToLoginView();
     }
+
+    @Override
+    public void switchToRespondSurveyView(LoginInputData loginInputData) {
+        final String username = loginInputData.getUsername();
+        final String password = loginInputData.getPassword();
+        final String pwd = userDataAccessObject.get(username).getPassword();
+
+        final User user = userDataAccessObject.get(loginInputData.getUsername());
+        userDataAccessObject.setCurrentUser(user.getName());
+
+        final LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
+        userPresenter.switchToRespondSurveyView(loginOutputData);
+    }
 }
