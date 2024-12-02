@@ -10,6 +10,7 @@ import data_access.InMemorySurveyDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.create_survey.CreateSurveyViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.respond.RespondToASurveyController;
@@ -57,6 +58,7 @@ public class MainWithInMemory {
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
         final ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
+        final CreateSurveyViewModel createSurveyViewModel = new CreateSurveyViewModel();
 
         final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
 
@@ -77,7 +79,7 @@ public class MainWithInMemory {
         final RespondToASurveyView idView = new RespondToASurveyView(idController, idVM);
 
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
-                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel, idVM);
+                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel, idVM, createSurveyViewModel);
         views.add(loggedInView, loggedInView.getViewName());
 
         viewManagerModel.setState(signupView.getViewName());

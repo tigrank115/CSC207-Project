@@ -4,6 +4,7 @@ import entity.CommonUserFactory;
 import entity.UserFactory;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.create_survey.CreateSurveyViewModel;
 import interface_adapter.logged_in.ChangePasswordController;
 import interface_adapter.logged_in.LoggedInPresenter;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -41,11 +42,13 @@ public final class ChangePasswordUseCaseFactory {
             ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
             LoginUserDataAccessInterface userDataAccessObject,
             LoginViewModel loginViewModel,
-            RespondToASurveyViewModel respondSurveyViewModel) {
+            RespondToASurveyViewModel respondSurveyViewModel,
+            CreateSurveyViewModel createSurveyViewModel) {
 
         final ChangePasswordController changePasswordController =
                     createChangePasswordUseCase(viewManagerModel, loggedInViewModel, resetPasswordViewModel,
-                            userDataAccessObject, resetUserDataAccessObject, loginViewModel, respondSurveyViewModel);
+                            userDataAccessObject, resetUserDataAccessObject, loginViewModel, respondSurveyViewModel,
+                            createSurveyViewModel);
         return new LoggedInView(loggedInViewModel, changePasswordController);
 
     }
@@ -57,11 +60,12 @@ public final class ChangePasswordUseCaseFactory {
             LoginUserDataAccessInterface userDataAccessObject,
             ChangePasswordUserDataAccessInterface resetUserDataAccessObject,
             LoginViewModel loginViewModel,
-            RespondToASurveyViewModel respondSurveyViewModel) {
+            RespondToASurveyViewModel respondSurveyViewModel,
+            CreateSurveyViewModel createSurveyViewModel) {
 
         // Notice how we pass this method's parameters through to the Presenter.
         final ChangePasswordOutputBoundary changePasswordOutputBoundary = new LoggedInPresenter(viewManagerModel,
-                loggedInViewModel, resetPasswordViewModel, loginViewModel, respondSurveyViewModel);
+                loggedInViewModel, resetPasswordViewModel, loginViewModel, respondSurveyViewModel, createSurveyViewModel);
 
         final UserFactory userFactory = new CommonUserFactory();
 

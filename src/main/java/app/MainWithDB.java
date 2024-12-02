@@ -81,6 +81,7 @@ public class MainWithDB {
         final GetSurveyOutputBoundary idPres = new RespondToASurveyPresenter(viewManagerModel, responseVM, idVM);
         final GetSurveyInputBoundary getSurveyInteractor = new GetSurveyInteractor(dbSurveyDAO, idPres);
         final RespondToASurveyController idController = new RespondToASurveyController(getSurveyInteractor);
+        final CreateSurveyViewModel createSurveyViewModel = new CreateSurveyViewModel();
 
         final RespondToASurveyView idView = new RespondToASurveyView(idController, idVM);
         views.add(idView, idView.getViewName());
@@ -92,7 +93,7 @@ public class MainWithDB {
         views.add(surveyResponseView, surveyResponseView.getViewName());
 
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
-                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel, idVM);
+                resetPasswordViewModel, userDataAccessObject, userDataAccessObject, loginViewModel, idVM, createSurveyViewModel);
         views.add(loggedInView, loggedInView.getViewName());
 
         final ResetPasswordView resetPasswordView = ResetPasswordUseCaseFactory.create(viewManagerModel,
@@ -102,7 +103,7 @@ public class MainWithDB {
 
         final CreateSurveyView createSurveyView = CreateSurveyUseCaseFactory.create(
                 viewManagerModel,
-                new CreateSurveyViewModel(),
+                createSurveyViewModel,
                 loggedInViewModel,
                 dbSurveyDAO);
         views.add(createSurveyView, createSurveyView.getViewName());
