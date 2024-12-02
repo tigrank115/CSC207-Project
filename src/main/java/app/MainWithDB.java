@@ -8,10 +8,10 @@ import javax.swing.WindowConstants;
 
 import data_access.DBSurveyDataAccessObject;
 import data_access.DBUserDataAccessObject;
-import data_access.InMemorySurveyDataAccessObject;
 import entity.CommonUserFactory;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.create_survey.CreateSurveyViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.respond.RespondToASurveyController;
@@ -63,7 +63,6 @@ public class MainWithDB {
         final SignupViewModel signupViewModel = new SignupViewModel();
         final ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
 
-        // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
         final DBUserDataAccessObject userDataAccessObject = new DBUserDataAccessObject(new CommonUserFactory());
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
@@ -77,6 +76,7 @@ public class MainWithDB {
 
         DBSurveyDataAccessObject dbSurveyDAO = new DBSurveyDataAccessObject();
         SurveyResponseViewModel responseVM = new SurveyResponseViewModel();
+
         final RespondToASurveyViewModel idVM = new RespondToASurveyViewModel();
         final GetSurveyOutputBoundary idPres = new RespondToASurveyPresenter(viewManagerModel, responseVM, idVM);
         final GetSurveyInputBoundary getSurveyInteractor = new GetSurveyInteractor(dbSurveyDAO, idPres);
@@ -99,11 +99,22 @@ public class MainWithDB {
                 resetPasswordViewModel, loggedInViewModel, userDataAccessObject, userDataAccessObject);
         views.add(resetPasswordView, resetPasswordView.getViewName());
 
+
+        final CreateSurveyView createSurveyView = CreateSurveyUseCaseFactory.create(
+                viewManagerModel,
+                new CreateSurveyViewModel(),
+                loggedInViewModel,
+                dbSurveyDAO);
+        views.add(createSurveyView, createSurveyView.getViewName());
+
         viewManagerModel.setState(signupView.getViewName());
+        // viewManagerModel.setState(createSurveyView.getViewName());
 
         viewManagerModel.firePropertyChanged();
 
-        application.pack();
+        // application.pack();
+        application.setSize(800, 600);
+        application.setResizable(false);
         application.setVisible(true);
     }
 }
