@@ -6,10 +6,10 @@ package entity;
 public interface User {
 
     /**
-     * Returns the username of the user.
-     * @return the username of the user.
+     * Returns the email address of the user.
+     * @return the email address of the user.
      */
-    String getName();
+    String getEmailAddress();
 
     /**
      * Returns the password of the user.

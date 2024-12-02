@@ -9,10 +9,10 @@ public interface LoginUserDataAccessInterface {
 
     /**
      * Checks if the given username exists.
-     * @param username the username to look for
-     * @return true if a user with the given username exists; false otherwise
+     * @param emailAddress the email address to look for
+     * @return true if a user with the given email address exists; false otherwise
      */
-    boolean existsByName(String username);
+    boolean existsByEmail(String emailAddress);
 
     /**
      * Saves the user.
@@ -22,10 +22,11 @@ public interface LoginUserDataAccessInterface {
 
     /**
      * Returns the user with the given username.
-     * @param username the username to look up
-     * @return the user with the given username
+     *
+     * @param emailAddress the email to look up
+     * @return the user with the given email address
      */
-    User get(String username);
+    User get(String emailAddress);
 
     /**
      * Returns the user with the given username.
@@ -34,8 +35,8 @@ public interface LoginUserDataAccessInterface {
     void setCurrentUser(String name);
 
     /**
-     * Returns the user with the given username.
-     * @return the user with the given username
+     * Returns the user with the given email address.
+     * @return the user with the given email address
      */
     String getCurrentUser();
 }
