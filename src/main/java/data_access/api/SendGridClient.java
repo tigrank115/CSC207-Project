@@ -3,6 +3,7 @@ package data_access.api;
 import com.sendgrid.*;
 import com.sendgrid.helpers.mail.*;
 import com.sendgrid.helpers.mail.objects.*;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -11,16 +12,24 @@ import java.util.Base64;
 public class SendGridClient implements EmailSender {
 
     public static final int OK_STATUS = 200;
+    public static final int BAD_REQUEST = 400;
+
+    private final String apiKey;
 
 
     private final String address;
 
-    public SendGridClient(String address, String apiKey) {
+    public SendGridClient(String address) {
         this.address = address;
+        Dotenv dotenv = Dotenv.load();
+
+        // Empty if it doesn't exist, so SendGrid will throw 4XX error
+        this.apiKey = dotenv.get("SENDGRID_API_KEY");
     }
 
     private void trySendEmail(Mail mail) {
-        SendGrid sendGrid = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+
+        SendGrid sendGrid = new SendGrid(apiKey);
         Request request = new Request();
 
         try {
@@ -29,7 +38,7 @@ public class SendGridClient implements EmailSender {
             request.setBody(mail.build());
             Response response = sendGrid.api(request);
 
-            if (response.getStatusCode() != OK_STATUS) {
+            if (response.getStatusCode() >= BAD_REQUEST) {
                 throw new RuntimeException(String.format("Error sending email (%d): %s",
                         response.getStatusCode(),
                         response.getBody()));
