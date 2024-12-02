@@ -1,7 +1,9 @@
 package view;
 
 import entity.AnswerType;
+import entity.CommonUserFactory;
 import entity.Question;
+import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.respond.RespondToASurveyController;
 import interface_adapter.respond.RespondToASurveyState;
 import interface_adapter.respond.RespondToASurveyViewModel;
@@ -37,12 +39,16 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
     private final List<JTextField> textAnswerFields;
     private final List<List<JRadioButton>> multipleChoiceButtons;
     private final JButton submit;
+    private final LoggedInViewModel loggedInViewModel;
 
 
-    public SurveyResponseView(SurveyResponseController controller, SurveyResponseViewModel respondtoasurveyViewModel) {
+    public SurveyResponseView(SurveyResponseController controller,
+                              SurveyResponseViewModel respondtoasurveyViewModel,
+                              LoggedInViewModel loggedinViewModel) {
 
         this.surveyResponseController = controller;
         this.surveyResponseViewModel = respondtoasurveyViewModel;
+        this.loggedInViewModel = loggedinViewModel;
         this.surveyResponseViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Survey Response View");
@@ -54,6 +60,8 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
 
         submit = new JButton("Submit Response");
         submit.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        submit.addActionListener(this);
 
         questionPrompts = new ArrayList<>();
         textAnswerFields = new ArrayList<>();
@@ -106,7 +114,11 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Cancel not implemented yet.");
+        surveyResponseController.makeResponse(
+                surveyResponseViewModel.getState().getSurvey(),
+                (new CommonUserFactory()).create(
+                        surveyResponseViewModel.getState().getEmailAddress(),
+                        loggedInViewModel.getState().getPassword()));
     }
 
     @Override
@@ -119,9 +131,11 @@ public class SurveyResponseView extends JPanel implements ActionListener, Proper
                     " (required question: " +
                     state.getSurvey().getQuestions().get(i).isRequired() + ")");
             questionPrompts.get(i).setAlignmentX(Component.CENTER_ALIGNMENT);
-            if (state.getSurvey().getQuestions().get(i).getAnswerType().equals(AnswerType.TEXT)) {
+
+            AnswerType answerType = state.getSurvey().getQuestions().get(i).getAnswerType();
+            if (answerType.equals(AnswerType.TEXT)) {
                 textAnswerFields.get(i).setVisible(true);
-            } else  {
+            } else {
                 for (int j = 0; j < state.getSurvey().getQuestions().get(i).getOptions().size(); j++) {
                     multipleChoiceButtons.get(i).get(j).setVisible(true);
                     multipleChoiceButtons.get(i).get(j).setAlignmentX(Component.CENTER_ALIGNMENT);

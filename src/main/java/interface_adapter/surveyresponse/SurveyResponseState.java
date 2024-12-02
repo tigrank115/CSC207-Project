@@ -5,15 +5,26 @@ import entity.Survey;
 public class SurveyResponseState {
 
     private String surveyID = "";
-    private String username = "";
+    private String emailAddress = "";
+    private String password = "";
     private Survey survey = null;
 
-    public void setUsername(String username) {
-        this.username = username;
+    private String errorMessage = null;
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setSurveyID(String surveyID) {
@@ -31,4 +42,13 @@ public class SurveyResponseState {
     public Survey getSurvey() {
         return survey;
     }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
 }

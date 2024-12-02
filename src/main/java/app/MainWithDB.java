@@ -88,8 +88,10 @@ public class MainWithDB {
 
         final SurveyResponseController surveyResponseController = new SurveyResponseController();
 
-        final SurveyResponseView surveyResponseView = new SurveyResponseView(surveyResponseController,
-                responseVM);
+        final SurveyResponseView surveyResponseView = new SurveyResponseView(
+                surveyResponseController,
+                responseVM,
+                loggedInViewModel);
         views.add(surveyResponseView, surveyResponseView.getViewName());
 
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
