@@ -48,6 +48,13 @@ see responses as well as recieve email confirmation about who responded. Our goa
 that is accessible to anyone, as our belief was an easy-to-use questionaire system is useful in almost any area that 
 values fast collection of information in a secure environment. 
 
+As our application lacks multiple input forms (auditory, touch), it is less likely to be used by people with vision 
+disabilities and people with disabilities that prevent them from operating at a computer. Adding features that allow this would 
+increase user diversity, and would be an extension goal. Improvement that abides by the medical model would be speech 
+recognition controls for those that can't type, and text-to-speech for the blind. With both, we are able to accomodate these 
+two demographics better. 
+
+
 
 
 
