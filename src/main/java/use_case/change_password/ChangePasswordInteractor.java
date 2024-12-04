@@ -2,7 +2,6 @@ package use_case.change_password;
 
 import entity.User;
 import entity.UserFactory;
-import interface_adapter.logged_in.LoggedInPresenter;
 import use_case.login.LoginInputData;
 import use_case.login.LoginOutputData;
 import use_case.login.LoginUserDataAccessInterface;
@@ -32,7 +31,7 @@ public class ChangePasswordInteractor implements ChangePasswordInputBoundary {
                                              changePasswordInputData.getPassword());
         resetUserDataAccessObject.changePassword(user);
 
-        final ChangePasswordOutputData changePasswordOutputData = new ChangePasswordOutputData(user.getName(),
+        final ChangePasswordOutputData changePasswordOutputData = new ChangePasswordOutputData(user.getEmailAddress(),
                                                                                   false);
         userPresenter.prepareSuccessView(changePasswordOutputData);
     }
@@ -49,9 +48,9 @@ public class ChangePasswordInteractor implements ChangePasswordInputBoundary {
         final String pwd = userDataAccessObject.get(username).getPassword();
 
         final User user = userDataAccessObject.get(loginInputData.getUsername());
-        userDataAccessObject.setCurrentUser(user.getName());
+        userDataAccessObject.setCurrentUser(user.getEmailAddress());
 
-        final LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
+        final LoginOutputData loginOutputData = new LoginOutputData(user.getEmailAddress(), false);
         userPresenter.switchToResetPasswordView(loginOutputData);
     }
 
@@ -67,9 +66,9 @@ public class ChangePasswordInteractor implements ChangePasswordInputBoundary {
         final String pwd = userDataAccessObject.get(username).getPassword();
 
         final User user = userDataAccessObject.get(loginInputData.getUsername());
-        userDataAccessObject.setCurrentUser(user.getName());
+        userDataAccessObject.setCurrentUser(user.getEmailAddress());
 
-        final LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
+        final LoginOutputData loginOutputData = new LoginOutputData(user.getEmailAddress(), false);
         userPresenter.switchToRespondSurveyView(loginOutputData);
     }
 
@@ -80,9 +79,9 @@ public class ChangePasswordInteractor implements ChangePasswordInputBoundary {
         final String pwd = userDataAccessObject.get(username).getPassword();
 
         final User user = userDataAccessObject.get(loginInputData.getUsername());
-        userDataAccessObject.setCurrentUser(user.getName());
+        userDataAccessObject.setCurrentUser(user.getEmailAddress());
 
-        final LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
+        final LoginOutputData loginOutputData = new LoginOutputData(user.getEmailAddress(), false);
         userPresenter.switchToCreateSurveyView(loginOutputData);
     }
 }

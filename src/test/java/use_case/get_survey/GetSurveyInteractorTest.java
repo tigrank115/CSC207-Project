@@ -6,6 +6,7 @@ import entity.MultipleChoiceQuestion;
 import entity.Survey;
 import entity.TextQuestion;
 import org.junit.jupiter.api.Test;
+import use_case.SampleDataGenerator;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -18,20 +19,7 @@ public class GetSurveyInteractorTest {
 
     @Test
     public void getInMemorySurveyTest() {
-        Survey survey = new Survey("Mood Survey");
-        survey.addQuestion(new MultipleChoiceQuestion(
-                "How are you?",
-                Arrays.asList("Good", "So-so", "Bad"),
-                false,
-                true
-        ));
-        survey.addQuestion(new TextQuestion(
-                "Describe yourself.",
-                true
-        ));
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2025, Calendar.JANUARY, 1, 0, 0, 0);
-        survey.setCloseDate(calendar.getTime());
+        Survey survey = SampleDataGenerator.newSurvey();
 
         InMemorySurveyDataAccessObject surveyRepository = new InMemorySurveyDataAccessObject();
         surveyRepository.saveSurvey(survey);

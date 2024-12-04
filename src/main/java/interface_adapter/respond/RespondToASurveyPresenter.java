@@ -1,20 +1,11 @@
 package interface_adapter.respond;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.logged_in.LoggedInState;
-import interface_adapter.login.LoginState;
-import interface_adapter.signup.SignupState;
 import interface_adapter.surveyresponse.SurveyResponseState;
 import interface_adapter.surveyresponse.SurveyResponseViewModel;
-import use_case.change_password.ChangePasswordOutputData;
 import use_case.get_survey.GetSurveyOutputBoundary;
 import use_case.get_survey.GetSurveyOutputData;
-import use_case.make_response.MakeResponseOutputBoundary;
-import use_case.make_response.MakeResponseOutputData;
-import use_case.signup.SignupOutputData;
-import view.RespondToASurveyView;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -53,7 +44,7 @@ public class RespondToASurveyPresenter extends Component implements GetSurveyOut
     @Override
     public void switchToResponseView(String username, GetSurveyOutputData getSurveyOutputData) {
         final SurveyResponseState surveyResponseState = surveyresponseViewModel.getState();
-        surveyResponseState.setUsername(username);
+        surveyResponseState.setEmailAddress(username);
         surveyResponseState.setSurvey(getSurveyOutputData.getFetchedSurvey());
         this.surveyresponseViewModel.setState(surveyResponseState);
         this.surveyresponseViewModel.firePropertyChanged();

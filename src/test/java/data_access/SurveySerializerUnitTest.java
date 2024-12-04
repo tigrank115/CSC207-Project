@@ -8,6 +8,8 @@ import entity.TextQuestion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import use_case.SampleDataGenerator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
@@ -18,20 +20,7 @@ public class SurveySerializerUnitTest {
 
     @Test
     public void surveyToJsonTest() {
-        Survey survey = new Survey("Mood Survey");
-        survey.addQuestion(new MultipleChoiceQuestion(
-                "How are you?",
-                Arrays.asList("Good", "So-so", "Bad"),
-                false,
-                true
-                ));
-        survey.addQuestion(new TextQuestion(
-                "Describe yourself.",
-                true
-                ));
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2025, Calendar.JANUARY, 1, 0, 0, 0);
-        survey.setCloseDate(calendar.getTime());
+        Survey survey = SampleDataGenerator.newSurvey();
 
         JSONObject result = SurveySerializer.surveyToJson(survey);
 
@@ -60,7 +49,7 @@ public class SurveySerializerUnitTest {
         assertTrue(questions.getJSONObject(0).getBoolean("isRequired"));
         assertEquals("How are you?",
                 questions.getJSONObject(0).getString("prompt"));
-        assertEquals("MULTIPLE_CHOICE",
+        assertEquals("SINGLE_CHOICE",
                 questions.getJSONObject(0).getString("answerType"));
 
         assertTrue(questions.getJSONObject(1).getBoolean("isRequired"));

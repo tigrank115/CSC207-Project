@@ -5,17 +5,17 @@ package entity;
  */
 public class CommonUser implements User {
 
-    private final String name;
+    private final String emailAddress;
     private final String password;
 
-    public CommonUser(String name, String password) {
-        this.name = name;
+    public CommonUser(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
         this.password = password;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
     @Override

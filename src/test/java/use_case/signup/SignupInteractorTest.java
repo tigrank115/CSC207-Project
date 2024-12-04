@@ -6,8 +6,6 @@ import entity.User;
 import entity.UserFactory;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-
 import static org.junit.Assert.*;
 
 
@@ -24,7 +22,7 @@ public class SignupInteractorTest {
             public void prepareSuccessView(SignupOutputData user) {
                 // 2 things to check: the output data is correct, and the user has been created in the DAO.
                 assertEquals("Paul", user.getUsername());
-                assertTrue(userRepository.existsByName("Paul"));
+                assertTrue(userRepository.existsByEmail("Paul"));
             }
 
             @Override

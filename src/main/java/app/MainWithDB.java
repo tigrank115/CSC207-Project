@@ -8,6 +8,7 @@ import javax.swing.WindowConstants;
 
 import data_access.DBSurveyDataAccessObject;
 import data_access.DBUserDataAccessObject;
+import data_access.EmailDataAccessObject;
 import entity.CommonUserFactory;
 import interface_adapter.ResetPassword.ResetPasswordViewModel;
 import interface_adapter.ViewManagerModel;
@@ -20,11 +21,14 @@ import interface_adapter.respond.RespondToASurveyViewModel;
 import interface_adapter.signup.SignupViewModel;
 
 import interface_adapter.surveyresponse.SurveyResponseController;
+import interface_adapter.surveyresponse.SurveyResponsePresenter;
 import interface_adapter.surveyresponse.SurveyResponseViewModel;
 import use_case.get_survey.GetSurveyInputBoundary;
 import use_case.get_survey.GetSurveyInteractor;
 import use_case.get_survey.GetSurveyOutputBoundary;
 
+import use_case.make_response.MakeResponseInteractor;
+import use_case.send_confirmation.SendConfirmationInteractor;
 import view.*;
 
 /**
@@ -75,6 +79,8 @@ public class MainWithDB {
 
 
         DBSurveyDataAccessObject dbSurveyDAO = new DBSurveyDataAccessObject();
+        EmailDataAccessObject emailDAO = new EmailDataAccessObject();
+
         SurveyResponseViewModel responseVM = new SurveyResponseViewModel();
 
         final RespondToASurveyViewModel idVM = new RespondToASurveyViewModel();
@@ -86,10 +92,14 @@ public class MainWithDB {
         final RespondToASurveyView idView = new RespondToASurveyView(idController, idVM);
         views.add(idView, idView.getViewName());
 
-        final SurveyResponseController surveyResponseController = new SurveyResponseController();
+        final SurveyResponseController surveyResponseController = new SurveyResponseController(
+                new MakeResponseInteractor(dbSurveyDAO, new SurveyResponsePresenter()),
+                new SendConfirmationInteractor(emailDAO, new SurveyResponsePresenter()));
 
-        final SurveyResponseView surveyResponseView = new SurveyResponseView(surveyResponseController,
-                responseVM);
+        final SurveyResponseView surveyResponseView = new SurveyResponseView(
+                surveyResponseController,
+                responseVM,
+                loggedInViewModel);
         views.add(surveyResponseView, surveyResponseView.getViewName());
 
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,

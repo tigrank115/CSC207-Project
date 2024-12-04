@@ -21,18 +21,18 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     private String currentUser;
 
     @Override
-    public boolean existsByName(String identifier) {
+    public boolean existsByEmail(String identifier) {
         return users.containsKey(identifier);
     }
 
     @Override
     public void save(User user) {
-        users.put(user.getName(), user);
+        users.put(user.getEmailAddress(), user);
     }
 
     @Override
-    public User get(String username) {
-        return users.get(username);
+    public User get(String emailAddress) {
+        return users.get(emailAddress);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     @Override
     public void changePassword(User user) {
         // Replace the old entry with the new password
-        users.put(user.getName(), user);
+        users.put(user.getEmailAddress(), user);
     }
 
 }

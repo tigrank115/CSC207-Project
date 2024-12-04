@@ -2,6 +2,8 @@ package data_access;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import data_access.api.EmailSender;
+import data_access.api.SendGridClient;
 import data_access.database_connection.FirebaseConnectionFactory;
 import data_access.serialization.ResponseSerializer;
 import data_access.serialization.SurveySerializer;
