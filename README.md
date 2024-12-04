@@ -17,7 +17,13 @@ This application was created for the final group project of CSC207,
 and is a survey application that allows a user to create and respond to surveys, and recieve a copy of their responses through an email API.
 
 # Table of Contents 
-Contributors - #Contributors 
+Contributors 
+Features 
+Installation Instructions 
+Usage Guide
+License
+Feedback 
+Contributions
 
 # Features 
 Signup - Allows the user to create an account with a username and password, which would allow them to create and respond to 
